@@ -1,0 +1,797 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="precompile.cc" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="json\json_file_value_serializer.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="json\json_parser.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="json\json_reader.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="json\json_string_value_serializer.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="json\json_writer.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="json\string_escape.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="vlog.cc" />
+    <ClCompile Include="version.cc" />
+    <ClCompile Include="values.cc" />
+    <ClCompile Include="value_conversions.cc" />
+    <ClCompile Include="utf_string_conversions.cc" />
+    <ClCompile Include="utf_string_conversion_utils.cc" />
+    <ClCompile Include="utf_offset_string_conversions.cc" />
+    <ClCompile Include="tracking_info.cc" />
+    <ClCompile Include="tracked_objects.cc" />
+    <ClCompile Include="timer.cc" />
+    <ClCompile Include="time_win.cc" />
+    <ClCompile Include="time.cc" />
+    <ClCompile Include="thread_task_runner_handle.cc" />
+    <ClCompile Include="task_runner.cc" />
+    <ClCompile Include="sys_string_conversions_win.cc" />
+    <ClCompile Include="sys_info_win.cc" />
+    <ClCompile Include="sys_info.cc" />
+    <ClCompile Include="stringprintf.cc" />
+    <ClCompile Include="string_util.cc" />
+    <ClCompile Include="string_split.cc" />
+    <ClCompile Include="string_piece.cc" />
+    <ClCompile Include="string_number_conversions.cc" />
+    <ClCompile Include="shared_memory_win.cc" />
+    <ClCompile Include="sha1_portable.cc" />
+    <ClCompile Include="sequenced_task_runner.cc" />
+    <ClCompile Include="run_loop.cc" />
+    <ClCompile Include="rand_util_win.cc" />
+    <ClCompile Include="rand_util.cc" />
+    <ClCompile Include="process_win.cc" />
+    <ClCompile Include="process_util_win.cc" />
+    <ClCompile Include="process_util.cc" />
+    <ClCompile Include="process_info_win.cc" />
+    <ClCompile Include="platform_file_win.cc" />
+    <ClCompile Include="platform_file.cc" />
+    <ClCompile Include="pickle.cc" />
+    <ClCompile Include="perftimer.cc" />
+    <ClCompile Include="pending_task.cc" />
+    <ClCompile Include="path_service.cc" />
+    <ClCompile Include="message_pump_win.cc" />
+    <ClCompile Include="message_pump_default.cc" />
+    <ClCompile Include="message_pump.cc" />
+    <ClCompile Include="message_loop_proxy_impl.cc" />
+    <ClCompile Include="message_loop_proxy.cc" />
+    <ClCompile Include="message_loop.cc" />
+    <ClCompile Include="md5.cc" />
+    <ClCompile Include="logging_win.cc" />
+    <ClCompile Include="logging.cc" />
+    <ClCompile Include="lazy_instance.cc" />
+    <ClCompile Include="hash.cc" />
+    <ClCompile Include="guid_win.cc" />
+    <ClCompile Include="guid.cc" />
+    <ClCompile Include="file_version_info_win.cc" />
+    <ClCompile Include="file_util_win.cc" />
+    <ClCompile Include="file_util.cc" />
+    <ClCompile Include="file_path.cc" />
+    <ClCompile Include="environment.cc" />
+    <ClCompile Include="cpu.cc" />
+    <ClCompile Include="command_line.cc" />
+    <ClCompile Include="callback_internal.cc" />
+    <ClCompile Include="bind_helpers.cc" />
+    <ClCompile Include="base64.cc" />
+    <ClCompile Include="base_switches.cc" />
+    <ClCompile Include="base_paths_win.cc" />
+    <ClCompile Include="base_paths.cc" />
+    <ClCompile Include="memory\aligned_memory.cc">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\ref_counted.cc">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\ref_counted_memory.cc">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\singleton.cc">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\weak_ptr.cc">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\non_thread_safe_impl.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\platform_thread_win.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\post_task_and_reply_impl.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\sequenced_worker_pool.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\simple_thread.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\thread.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\thread_checker_impl.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\thread_collision_warner.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\thread_local_storage_win.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\thread_local_win.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\thread_restrictions.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\watchdog.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\worker_pool.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\worker_pool_win.cc">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="at_exit.cc" />
+    <ClCompile Include="location.cc" />
+    <ClCompile Include="debug\alias.cc">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\debug_on_start_win.cc">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\debugger.cc">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\debugger_win.cc">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\profiler.cc">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\stack_trace.cc">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\stack_trace_win.cc">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\trace_event.cc">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\trace_event_impl.cc">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\trace_event_win.cc">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\bucket_ranges.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\field_trial.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\histogram.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\histogram_base.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\histogram_samples.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\histogram_snapshot_manager.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\sample_map.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\sample_vector.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\sparse_histogram.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\statistics_recorder.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\stats_counters.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics\stats_table.cc">
+      <Filter>metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="win\enum_variant.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\event_trace_controller.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\event_trace_provider.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\i18n.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\iat_patch_function.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\iunknown_impl.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\metro.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\object_watcher.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\pe_image.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\registry.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\resource_util.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\sampling_profiler.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\scoped_bstr.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\scoped_handle.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\scoped_process_information.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\scoped_variant.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\shortcut.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\startup_information.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\text_services_message_filter.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\win_util.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\windows_version.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\wrapped_window_proc.cc">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="profiler\alternate_timer.cc">
+      <Filter>profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="profiler\scoped_profile.cc">
+      <Filter>profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="profiler\tracked_time.cc">
+      <Filter>profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\cancellation_flag.cc">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\condition_variable_win.cc">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\lock.cc">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\lock_impl_win.cc">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\waitable_event_watcher_win.cc">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\waitable_event_win.cc">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\dmg_fp\dtoa_wrapper.cc">
+      <Filter>third_party\dmg_fp</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\dmg_fp\g_fmt.cc">
+      <Filter>third_party\dmg_fp</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\icu\icu_utf.cc">
+      <Filter>third_party\icu</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\nspr\prtime.cc">
+      <Filter>third_party\nspr</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\modp_b64\modp_b64.cc">
+      <Filter>third_party\modp_b64</Filter>
+    </ClCompile>
+    <ClCompile Include="build_time.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="precompile.h" />
+    <ClInclude Include="json\json_file_value_serializer.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json_parser.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json_reader.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json_string_value_serializer.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json_value_converter.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json_writer.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\string_escape.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="vlog.h" />
+    <ClInclude Include="version.h" />
+    <ClInclude Include="values.h" />
+    <ClInclude Include="value_conversions.h" />
+    <ClInclude Include="utf_string_conversions.h" />
+    <ClInclude Include="utf_string_conversion_utils.h" />
+    <ClInclude Include="utf_offset_string_conversions.h" />
+    <ClInclude Include="tuple.h" />
+    <ClInclude Include="tracking_info.h" />
+    <ClInclude Include="tracked_objects.h" />
+    <ClInclude Include="timer.h" />
+    <ClInclude Include="time.h" />
+    <ClInclude Include="thread_task_runner_handle.h" />
+    <ClInclude Include="template_util.h" />
+    <ClInclude Include="task_runner_util.h" />
+    <ClInclude Include="task_runner.h" />
+    <ClInclude Include="sys_string_conversions.h" />
+    <ClInclude Include="sys_info.h" />
+    <ClInclude Include="stringprintf.h" />
+    <ClInclude Include="string16.h" />
+    <ClInclude Include="string_util_win.h" />
+    <ClInclude Include="string_util.h" />
+    <ClInclude Include="string_tokenizer.h" />
+    <ClInclude Include="string_split.h" />
+    <ClInclude Include="string_piece.h" />
+    <ClInclude Include="string_number_conversions.h" />
+    <ClInclude Include="stl_util.h" />
+    <ClInclude Include="single_thread_task_runner.h" />
+    <ClInclude Include="shared_memory.h" />
+    <ClInclude Include="sha1.h" />
+    <ClInclude Include="sequenced_task_runner_helpers.h" />
+    <ClInclude Include="sequenced_task_runner.h" />
+    <ClInclude Include="scoped_observer.h" />
+    <ClInclude Include="run_loop.h" />
+    <ClInclude Include="rand_util.h" />
+    <ClInclude Include="process_util.h" />
+    <ClInclude Include="process_info.h" />
+    <ClInclude Include="process.h" />
+    <ClInclude Include="port.h" />
+    <ClInclude Include="platform_file.h" />
+    <ClInclude Include="pickle.h" />
+    <ClInclude Include="perftimer.h" />
+    <ClInclude Include="pending_task.h" />
+    <ClInclude Include="path_service.h" />
+    <ClInclude Include="observer_list_threadsafe.h" />
+    <ClInclude Include="observer_list.h" />
+    <ClInclude Include="message_pump_win.h" />
+    <ClInclude Include="message_pump_observer.h" />
+    <ClInclude Include="message_pump_dispatcher.h" />
+    <ClInclude Include="message_pump_default.h" />
+    <ClInclude Include="message_pump.h" />
+    <ClInclude Include="message_loop_proxy_impl.h" />
+    <ClInclude Include="message_loop_proxy.h" />
+    <ClInclude Include="message_loop.h" />
+    <ClInclude Include="md5.h" />
+    <ClInclude Include="logging_win.h" />
+    <ClInclude Include="logging.h" />
+    <ClInclude Include="lazy_instance.h" />
+    <ClInclude Include="id_map.h" />
+    <ClInclude Include="hash_tables.h" />
+    <ClInclude Include="hash.h" />
+    <ClInclude Include="guid.h" />
+    <ClInclude Include="format_macros.h" />
+    <ClInclude Include="float_util.h" />
+    <ClInclude Include="file_version_info_win.h" />
+    <ClInclude Include="file_version_info.h" />
+    <ClInclude Include="file_util.h" />
+    <ClInclude Include="file_path.h" />
+    <ClInclude Include="environment.h" />
+    <ClInclude Include="cpu.h" />
+    <ClInclude Include="compiler_specific.h" />
+    <ClInclude Include="command_line.h" />
+    <ClInclude Include="cancelable_callback.h" />
+    <ClInclude Include="callback_internal.h" />
+    <ClInclude Include="callback_helpers.h" />
+    <ClInclude Include="callback_forward.h" />
+    <ClInclude Include="callback.h" />
+    <ClInclude Include="bits.h" />
+    <ClInclude Include="bind_internal_win.h" />
+    <ClInclude Include="bind_internal.h" />
+    <ClInclude Include="bind_helpers.h" />
+    <ClInclude Include="bind.h" />
+    <ClInclude Include="basictypes.h" />
+    <ClInclude Include="base64.h" />
+    <ClInclude Include="base_switches.h" />
+    <ClInclude Include="base_paths_win.h" />
+    <ClInclude Include="base_paths.h" />
+    <ClInclude Include="base_export.h" />
+    <ClInclude Include="memory\aligned_memory.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\linked_ptr.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\manual_constructor.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\raw_scoped_refptr_mismatch_checker.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\ref_counted.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\ref_counted_memory.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\scoped_generic_obj.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\scoped_handle.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\scoped_nsobject.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\scoped_open_process.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\scoped_policy.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\scoped_ptr.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\scoped_vector.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\singleton.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\singleton_objc.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\weak_ptr.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\non_thread_safe.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\non_thread_safe_impl.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\platform_thread.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\post_task_and_reply_impl.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\sequenced_worker_pool.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\simple_thread.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\thread.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\thread_checker.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\thread_checker_impl.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\thread_collision_warner.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\thread_local.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\thread_local_storage.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\thread_restrictions.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\watchdog.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\worker_pool.h">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="at_exit.h" />
+    <ClInclude Include="atomic_ref_count.h" />
+    <ClInclude Include="atomic_sequence_num.h" />
+    <ClInclude Include="atomicops.h" />
+    <ClInclude Include="atomicops_internals_x86_msvc.h" />
+    <ClInclude Include="build_config.h" />
+    <ClInclude Include="critical_closure.h" />
+    <ClInclude Include="event_types.h" />
+    <ClInclude Include="location.h" />
+    <ClInclude Include="move.h" />
+    <ClInclude Include="debug\alias.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="debug\debug_on_start_win.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="debug\debugger.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="debug\leak_annotations.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="debug\leak_tracker.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="debug\profiler.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="debug\stack_trace.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="debug\trace_event.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="debug\trace_event_impl.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="debug\trace_event_win.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\bucket_ranges.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\field_trial.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\histogram.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\histogram_base.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\histogram_flattener.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\histogram_samples.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\histogram_snapshot_manager.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\sample_map.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\sample_vector.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\sparse_histogram.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\statistics_recorder.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\stats_counters.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics\stats_table.h">
+      <Filter>metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="win\enum_variant.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\event_trace_consumer.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\event_trace_controller.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\event_trace_provider.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\i18n.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\iat_patch_function.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\iunknown_impl.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\metro.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\object_watcher.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\pe_image.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\registry.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\resource_util.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\sampling_profiler.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\scoped_bstr.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\scoped_co_mem.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\scoped_com_initializer.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\scoped_comptr.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\scoped_gdi_object.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\scoped_handle.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\scoped_hdc.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\scoped_hglobal.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\scoped_process_information.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\scoped_select_object.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\scoped_variant.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\shortcut.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\startup_information.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\text_services_message_filter.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\win_util.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\windows_version.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\wrapped_window_proc.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="profiler\alternate_timer.h">
+      <Filter>profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="profiler\scoped_profile.h">
+      <Filter>profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="profiler\tracked_time.h">
+      <Filter>profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="synchronization\cancellation_flag.h">
+      <Filter>synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="synchronization\condition_variable.h">
+      <Filter>synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="synchronization\lock.h">
+      <Filter>synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="synchronization\lock_impl.h">
+      <Filter>synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="synchronization\spin_wait.h">
+      <Filter>synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="synchronization\waitable_event.h">
+      <Filter>synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="synchronization\waitable_event_watcher.h">
+      <Filter>synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\dmg_fp\dmg_fp.h">
+      <Filter>third_party\dmg_fp</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\icu\icu_utf.h">
+      <Filter>third_party\icu</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\nspr\prcpucfg.h">
+      <Filter>third_party\nspr</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\nspr\prcpucfg_win.h">
+      <Filter>third_party\nspr</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\nspr\prtime.h">
+      <Filter>third_party\nspr</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\nspr\prtypes.h">
+      <Filter>third_party\nspr</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\modp_b64\modp_b64.h">
+      <Filter>third_party\modp_b64</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\modp_b64\modp_b64_data.h">
+      <Filter>third_party\modp_b64</Filter>
+    </ClInclude>
+    <ClInclude Include="build_time.h" />
+    <ClInclude Include="sys_byteorder.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="json">
+      <UniqueIdentifier>{fa15316f-9cf9-4a18-93be-4b7858e21b63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="memory">
+      <UniqueIdentifier>{db6113b8-940f-4060-a7e7-d438ea98a4e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="threading">
+      <UniqueIdentifier>{33a9f376-b33c-42d4-901f-866bf7fb301e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="debug">
+      <UniqueIdentifier>{4b113861-b87a-4624-9558-35c458ee3c0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="synchronization">
+      <UniqueIdentifier>{33525b54-6cda-4717-8fc6-42c3c3fb5b8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="profiler">
+      <UniqueIdentifier>{f44bfd48-f597-4847-8c3c-519a799d1058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="metrics">
+      <UniqueIdentifier>{11e55baf-68fb-4977-a5ed-35b267f57502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="win">
+      <UniqueIdentifier>{2431d6e9-d3b7-409b-bdc1-48e875178bbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{ed1d908e-c22e-4f26-b2a3-53e166b160cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\dmg_fp">
+      <UniqueIdentifier>{afe85694-2ec1-4a5d-a5c4-96d12c17c8a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\icu">
+      <UniqueIdentifier>{17822b83-1dc3-4bc8-8223-8dec020ad482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\modp_b64">
+      <UniqueIdentifier>{d643116e-46dc-460a-af48-f9dcff7f8873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\nspr">
+      <UniqueIdentifier>{a2d81d23-33f5-4fbe-acfb-d91426985004}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
