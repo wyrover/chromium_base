@@ -20,6 +20,17 @@
 
 #define BUILD_PRECOMPILE_H_
 
+//////////////////////////////////////////////////////////////////////////
+// add WINSDK_8_SET switch
+// if you set win8 sdk paths(includes and libs) you can define it
+// Methods:
+// 1. Property->C/C++->General->Additional Include Directories
+// 8.0\Include\shared, 8.0\Include\um, 8.0\Include\winrt;
+// 2. Property->Link->General->Additional Library Directories
+// 8.0\Lib\win8\um\x86
+// 3. #define WINSDK_8_SET
+//////////////////////////////////////////////////////////////////////////
+
 // The Windows header needs to come before almost all the other
 // Windows-specific headers.
 #include <Windows.h>

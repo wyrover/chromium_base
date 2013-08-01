@@ -110,6 +110,7 @@ bool CreateOrUpdateShortcutLink(const FilePath& shortcut_path,
     return false;
   }
 
+#if defined(WINSDK_8_SET)
   bool has_app_id =
       (properties.options & ShortcutProperties::PROPERTIES_APP_ID) != 0;
   bool has_dual_mode =
@@ -131,6 +132,7 @@ bool CreateOrUpdateShortcutLink(const FilePath& shortcut_path,
       return false;
     }
   }
+#endif
 
   HRESULT result = i_persist_file->Save(shortcut_path.value().c_str(), TRUE);
 

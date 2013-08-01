@@ -158,6 +158,7 @@ bool PathProviderWin(int key, FilePath* result) {
       cur = executableDir.DirName().DirName();
       break;
     }
+#if defined(WINSDK_8_SET)
     case base::DIR_APP_SHORTCUTS: {
       if (win::GetVersion() < win::VERSION_WIN8)
         return false;
@@ -170,6 +171,7 @@ bool PathProviderWin(int key, FilePath* result) {
       cur = FilePath(string16(path_buf));
       break;
     }
+#endif
     case base::DIR_USER_DESKTOP:
       if (FAILED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL,
                                  SHGFP_TYPE_CURRENT, system_buffer))) {
