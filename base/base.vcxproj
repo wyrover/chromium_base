@@ -40,23 +40,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)$(Configuration)\obj\</IntDir>
+    <IntDir>$(OutDir)\obj\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)$(Configuration)\obj\</IntDir>
+    <IntDir>$(OutDir)\obj\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;NOMINMAX;_CRT_RAND_S;_DEBUG;_WINDOWS;_USRDLL;BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>COMPONENT_BUILD;BASE_IMPLEMENTATION;WIN32;NOMINMAX;_CRT_RAND_S;_DEBUG;_WINDOWS;_USRDLL;BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>precompile.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>precompile.h</ForcedIncludeFiles>
       <TreatWarningAsError>false</TreatWarningAsError>
       <AdditionalIncludeDirectories>..;third_party\wtl\include</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4244;4355;4996;4018;4005</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244;4355;4996;4018;4005;4251</DisableSpecificWarnings>
       <MinimalRebuild>false</MinimalRebuild>
       <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
@@ -75,12 +75,12 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NOMINMAX;_CRT_RAND_S;NDEBUG;_WINDOWS;_USRDLL;BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>COMPONENT_BUILD;BASE_IMPLEMENTATION;WIN32;NOMINMAX;_CRT_RAND_S;NDEBUG;_WINDOWS;_USRDLL;BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>precompile.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>precompile.h</ForcedIncludeFiles>
       <TreatWarningAsError>false</TreatWarningAsError>
       <AdditionalIncludeDirectories>..;third_party\wtl\include</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4244;4355;4996;4018;4005</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244;4355;4996;4018;4005;4251</DisableSpecificWarnings>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
@@ -110,7 +110,6 @@
     <ClCompile Include="debug\alias.cc" />
     <ClCompile Include="debug\debugger.cc" />
     <ClCompile Include="debug\debugger_win.cc" />
-    <ClCompile Include="debug\debug_on_start_win.cc" />
     <ClCompile Include="debug\profiler.cc" />
     <ClCompile Include="debug\stack_trace.cc" />
     <ClCompile Include="debug\stack_trace_win.cc" />
@@ -280,7 +279,6 @@
     <ClInclude Include="critical_closure.h" />
     <ClInclude Include="debug\alias.h" />
     <ClInclude Include="debug\debugger.h" />
-    <ClInclude Include="debug\debug_on_start_win.h" />
     <ClInclude Include="debug\leak_annotations.h" />
     <ClInclude Include="debug\leak_tracker.h" />
     <ClInclude Include="debug\profiler.h" />

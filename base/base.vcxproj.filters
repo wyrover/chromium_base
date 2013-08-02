@@ -150,9 +150,6 @@
     <ClCompile Include="debug\alias.cc">
       <Filter>debug</Filter>
     </ClCompile>
-    <ClCompile Include="debug\debug_on_start_win.cc">
-      <Filter>debug</Filter>
-    </ClCompile>
     <ClCompile Include="debug\debugger.cc">
       <Filter>debug</Filter>
     </ClCompile>
@@ -538,9 +535,6 @@
     <ClInclude Include="location.h" />
     <ClInclude Include="move.h" />
     <ClInclude Include="debug\alias.h">
-      <Filter>debug</Filter>
-    </ClInclude>
-    <ClInclude Include="debug\debug_on_start_win.h">
       <Filter>debug</Filter>
     </ClInclude>
     <ClInclude Include="debug\debugger.h">
