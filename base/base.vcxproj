@@ -59,6 +59,7 @@
       <DisableSpecificWarnings>4244;4355;4996;4018;4005;4251</DisableSpecificWarnings>
       <MinimalRebuild>false</MinimalRebuild>
       <FunctionLevelLinking>true</FunctionLevelLinking>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
