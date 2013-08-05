@@ -1,9 +1,9 @@
 #include "main_loop.h"
-#include "result_codes.h"
 #include "../base/message_loop.h"
-#include "../base/threading/thread_restrictions.h"
 #include "../base/bind.h"
 #include "../base/run_loop.h"
+#include "../base/threading/thread_restrictions.h"
+#include "result_codes.h"
 #include "thread_impl.h"
 
 MainLoop* g_current_main_loop = NULL;

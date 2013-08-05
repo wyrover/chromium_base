@@ -22,7 +22,7 @@ public:
 
 protected:
   virtual void Init() OVERRIDE;
-
+  virtual void Run(MessageLoop* message_loop) OVERRIDE;
   virtual void CleanUp() OVERRIDE;
 
 private:

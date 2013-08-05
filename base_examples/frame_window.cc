@@ -43,7 +43,7 @@ void FrameWindow::Initialize() {
 }
 
 void FrameWindow::Show() {
-  ShowWindow(window_handle_, SW_MAXIMIZE|SW_SHOW);
+  ShowWindow(window_handle_, SW_SHOWNORMAL);
   UpdateWindow(window_handle_);
 }
 

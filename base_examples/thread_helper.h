@@ -24,7 +24,7 @@ public:
 
   static bool PostDelayedTask(ID identifier,
     const tracked_objects::Location& from_here,
-    const base::Closure& task, int64 delay_ms);
+    const base::Closure& task, base::TimeDelta delay);
 
   static bool PostNonNestableTask(ID identifier,
     const tracked_objects::Location& from_here,
@@ -32,11 +32,14 @@ public:
 
   static bool PostNonNestedDelayedTask(ID identifier,
     const tracked_objects::Location& from_here,
-    const base::Closure& task, int64 delay_ms);
+    const base::Closure& task, base::TimeDelta delay);
 
   static bool PostTaskAndReply(ID identifier,
     const tracked_objects::Location& from_here,
     const base::Closure& task, const base::Closure& reply);
+
+  static scoped_refptr<base::MessageLoopProxy> GetMessageLoopProxyForThread(
+    ID identifier);
 
   static bool CurrentlyOn(ID identifier);
 

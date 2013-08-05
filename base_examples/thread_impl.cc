@@ -1,8 +1,7 @@
 #include "thread_impl.h"
+
 #include "../base/atomicops.h"
-#include "../base/bind.h"
 #include "../base/lazy_instance.h"
-#include "../base/message_loop.h"
 #include "../base/threading/thread_restrictions.h"
 
 namespace {
@@ -53,6 +52,10 @@ void ThreadImpl::Init() {
     reinterpret_cast<ThreadDelegate*>(stored_pointer);
   if (delegate)
     delegate->Init();
+}
+
+void ThreadImpl::Run(MessageLoop* message_loop) {
+  Thread::Run(message_loop);
 }
 
 void ThreadImpl::CleanUp() {
@@ -109,6 +112,34 @@ bool ThreadImpl::PostTaskHelper(ThreadHelper::ID identifier,
     return !!message_loop;
 }
 
+class ThreadHelperMessageLoopProxy: public base::MessageLoopProxy {
+public:
+  explicit ThreadHelperMessageLoopProxy(ThreadHelper::ID identifier)
+    : id_(identifier) {
+  }
+
+  virtual bool PostDelayedTask(const tracked_objects::Location& from_here,
+    const base::Closure& task, base::TimeDelta delay) OVERRIDE {
+      return ThreadHelper::PostNonNestedDelayedTask(id_, from_here, task, delay);
+  }
+
+  virtual bool PostNonNestableDelayedTask(const tracked_objects::Location& from_here,
+    const base::Closure& task, base::TimeDelta delay) OVERRIDE {
+      return ThreadHelper::PostNonNestedDelayedTask(id_, from_here, task, delay);
+  }
+
+  virtual bool RunsTasksOnCurrentThread() const OVERRIDE {
+    return ThreadHelper::CurrentlyOn(id_);
+  }
+
+protected:
+  virtual ~ThreadHelperMessageLoopProxy() {}
+
+private:
+  ThreadHelper::ID id_;
+  DISALLOW_COPY_AND_ASSIGN(ThreadHelperMessageLoopProxy);
+};
+
 bool ThreadHelper::PostTask(ID identifier,
   const tracked_objects::Location& from_here, const base::Closure& task) {
     return ThreadImpl::PostTaskHelper(identifier, from_here, task, base::TimeDelta(), true);
@@ -116,9 +147,8 @@ bool ThreadHelper::PostTask(ID identifier,
 
 bool ThreadHelper::PostDelayedTask(ID identifier,
   const tracked_objects::Location& from_here,
-  const base::Closure& task, int64 delay_ms) {
-    return ThreadImpl::PostTaskHelper(identifier, from_here, task,
-      base::TimeDelta::FromMilliseconds(delay_ms), true);
+  const base::Closure& task, base::TimeDelta delay) {
+    return ThreadImpl::PostTaskHelper(identifier, from_here, task, delay, true);
 }
 
 bool ThreadHelper::PostNonNestableTask(ID identifier,
@@ -130,15 +160,22 @@ bool ThreadHelper::PostNonNestableTask(ID identifier,
 
 bool ThreadHelper::PostNonNestedDelayedTask(ID identifier,
   const tracked_objects::Location& from_here,
-  const base::Closure& task, int64 delay_ms) {
-    return ThreadImpl::PostTaskHelper(identifier, from_here, task,
-      base::TimeDelta::FromMilliseconds(delay_ms), false);
+  const base::Closure& task, base::TimeDelta delay) {
+    return ThreadImpl::PostTaskHelper(identifier, from_here, task, delay, false);
 }
 
 bool ThreadHelper::PostTaskAndReply(ID identifier,
   const tracked_objects::Location& from_here,
   const base::Closure& task, const base::Closure& reply) {
-    return false;
+  return GetMessageLoopProxyForThread(identifier)->PostTaskAndReply(
+    from_here, task, reply);
+}
+
+scoped_refptr<base::MessageLoopProxy> ThreadHelper::GetMessageLoopProxyForThread(
+  ID identifier) {
+  scoped_refptr<base::MessageLoopProxy> proxy(
+    new ThreadHelperMessageLoopProxy(identifier));
+  return proxy;
 }
 
 bool ThreadHelper::CurrentlyOn(ID identifier) {

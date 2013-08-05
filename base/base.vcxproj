@@ -117,7 +117,7 @@
     <ClCompile Include="debug\trace_event.cc" />
     <ClCompile Include="debug\trace_event_impl.cc" />
     <ClCompile Include="debug\trace_event_win.cc" />
-    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="dllmain.cc" />
     <ClCompile Include="environment.cc" />
     <ClCompile Include="file_path.cc" />
     <ClCompile Include="file_util.cc" />
