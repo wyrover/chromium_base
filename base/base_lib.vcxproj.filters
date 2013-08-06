@@ -5,7 +5,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="precompile.cc" />
-    <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="json\json_file_value_serializer.cc">
       <Filter>json</Filter>
     </ClCompile>
@@ -319,6 +318,7 @@
       <Filter>third_party\modp_b64</Filter>
     </ClCompile>
     <ClCompile Include="build_time.cc" />
+    <ClCompile Include="dllmain.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precompile.h" />
