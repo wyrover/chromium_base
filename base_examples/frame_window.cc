@@ -1,5 +1,9 @@
 #include "frame_window.h"
 #include "Resource.h"
+#include "../base/logging.h"
+#include "../base/win/wrapped_window_proc.h"
+#include "../base/bind.h"
+#include "thread_helper.h"
 
 extern HINSTANCE g_instance;
 
@@ -21,30 +25,29 @@ FrameWindow* FrameWindow::GetInstance() {
 void FrameWindow::Initialize() {
   LoadString(g_instance, IDS_APP_TITLE, title_, MAX_LOADSTRING);
   LoadString(g_instance, IDC_BASE_EXAMPLES, window_class_name_, MAX_LOADSTRING);
+  static ATOM atom = 0;
+  WNDCLASSEX window_class;
+  base::win::InitializeWindowClass(window_class_name_,
+    base::win::WrappedWindowProc<WndProc>, CS_HREDRAW|CS_VREDRAW, 0, 0, LoadCursor(0, IDC_ARROW),
+    reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1), MAKEINTRESOURCE(IDC_BASE_EXAMPLES),
+    NULL, NULL, &window_class);
+  atom = RegisterClassEx(&window_class);
+  DCHECK(atom);
 
-  WNDCLASSEX wcex;
-  wcex.cbSize = sizeof(WNDCLASSEX);
-  wcex.style = CS_HREDRAW | CS_VREDRAW;
-  wcex.lpfnWndProc = WndProc;
-  wcex.cbClsExtra = 0;
-  wcex.cbWndExtra = 0;
-  wcex.hInstance = g_instance;
-  wcex.hIcon = LoadIcon(g_instance, MAKEINTRESOURCE(IDI_BASE_EXAMPLES));
-  wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-  wcex.lpszMenuName = MAKEINTRESOURCE(IDC_BASE_EXAMPLES);
-  wcex.lpszClassName = window_class_name_;
-  wcex.hIconSm = LoadIcon(g_instance, MAKEINTRESOURCE(IDI_SMALL));
-
-  RegisterClassEx(&wcex);
-
-  window_handle_ = CreateWindow(window_class_name_, title_, WS_OVERLAPPEDWINDOW,
+  window_handle_ = CreateWindow(MAKEINTATOM(atom), title_, WS_OVERLAPPEDWINDOW,
     CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, g_instance, NULL);
 }
 
 void FrameWindow::Show() {
   ShowWindow(window_handle_, SW_SHOWNORMAL);
   UpdateWindow(window_handle_);
+}
+
+void FrameWindow::DoSomethingOnIOThread(HWND hWnd) {
+  DCHECK(ThreadHelper::CurrentlyOn(ThreadHelper::IO));
+
+  //Do Something
+  //PostMessage(hWnd, WM_DESTROY, 0, 0);
 }
 
 LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
@@ -59,6 +62,8 @@ LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
     switch (wmId) {
     case IDM_ABOUT:
       DialogBox(g_instance, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+      ThreadHelper::PostDelayedTask(ThreadHelper::IO, FROM_HERE,
+        base::Bind(&DoSomethingOnIOThread, hWnd), base::TimeDelta::FromMilliseconds(5000));
       break;
     case IDM_EXIT:
       DestroyWindow(hWnd);

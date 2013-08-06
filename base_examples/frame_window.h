@@ -16,6 +16,8 @@ public:
 
   static FrameWindow* GetInstance();
 
+  static void DoSomethingOnIOThread(HWND hWnd);
+
   static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
   static INT_PTR CALLBACK About(HWND, UINT, WPARAM, LPARAM);

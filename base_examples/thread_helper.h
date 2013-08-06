@@ -4,6 +4,8 @@
 #include "../base/basictypes.h"
 #include "../base/callback.h"
 #include "../base/location.h"
+#include "../base/time.h"
+#include "../base/message_loop_proxy.h"
 
 class ThreadDelegate;
 
