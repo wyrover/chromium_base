@@ -319,6 +319,45 @@
     </ClCompile>
     <ClCompile Include="build_time.cc" />
     <ClCompile Include="dllmain.cc" />
+    <ClCompile Include="ipc\ipc_channel.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_channel_proxy.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_channel_reader.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_channel_win.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_forwarding_message_filter.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_logging.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_message.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_message_utils.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_platform_file.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_switches.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_sync_channel.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_sync_message.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_sync_message_filter.cc">
+      <Filter>ipc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precompile.h" />
@@ -746,6 +785,92 @@
     </ClInclude>
     <ClInclude Include="build_time.h" />
     <ClInclude Include="sys_byteorder.h" />
+    <ClInclude Include="ipc\ipc_channel.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_channel_handle.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_channel_proxy.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_channel_reader.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_channel_win.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_descriptors.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_forwarding_message_filter.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_listener.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_logging.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_message.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_message_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_message_null_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_message_start.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_message_utils.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_message_utils_impl.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_param_traits.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_platform_file.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_sender.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_switches.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_sync_channel.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_sync_message.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_sync_message_filter.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\param_traits_log_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\param_traits_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\param_traits_read_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\param_traits_write_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\struct_constructor_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\struct_destructor_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="nullable_string16.h" />
+    <ClInclude Include="auto_reset.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="json">
@@ -786,6 +911,9 @@
     </Filter>
     <Filter Include="third_party\nspr">
       <UniqueIdentifier>{a2d81d23-33f5-4fbe-acfb-d91426985004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ipc">
+      <UniqueIdentifier>{f4c4fa4d-6e68-4986-b89b-0e92210de05f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
