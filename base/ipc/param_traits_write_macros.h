@@ -6,7 +6,7 @@
 #define IPC_PARAM_TRAITS_WRITE_MACROS_H_
 
 // Null out all the macros that need nulling.
-#include "ipc/ipc_message_null_macros.h"
+#include "base/ipc/ipc_message_null_macros.h"
 
 // STRUCT declarations cause corresponding STRUCT_TRAITS declarations to occur.
 #undef IPC_STRUCT_BEGIN

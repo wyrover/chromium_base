@@ -6,7 +6,7 @@
 #define IPC_STRUCT_CONSTRUCTOR_MACROS_H_
 
 // Null out all the macros that need nulling.
-#include "ipc/ipc_message_null_macros.h"
+#include "base/ipc/ipc_message_null_macros.h"
 
 // Set up so next include will generate constructors.
 #undef IPC_STRUCT_BEGIN

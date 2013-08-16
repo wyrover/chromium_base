@@ -189,7 +189,7 @@
 #include "base/ipc/param_traits_macros.h"
 
 #if defined(IPC_MESSAGE_IMPL)
-#include "ipc/ipc_message_utils_impl.h"
+#include "base/ipc/ipc_message_utils_impl.h"
 #endif
 
 // Macros for defining structs.  May be subsequently redefined.

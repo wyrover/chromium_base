@@ -6,15 +6,11 @@
 #include "result_codes.h"
 #include "thread_impl.h"
 
-MainLoop* g_current_main_loop = NULL;
-
 MainLoop::MainLoop()
   : result_code_(RESULT_CODE_NORMAL_EXIT) {
-    g_current_main_loop = this;
 }
 
 MainLoop::~MainLoop() {
-  g_current_main_loop = NULL;
 }
 
 void MainLoop::Init() {}

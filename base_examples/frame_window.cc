@@ -4,6 +4,7 @@
 #include "../base/win/wrapped_window_proc.h"
 #include "../base/bind.h"
 #include "thread_helper.h"
+#include "leon_generator.h"
 
 extern HINSTANCE g_instance;
 
@@ -67,6 +68,9 @@ LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
       break;
     case IDM_EXIT:
       DestroyWindow(hWnd);
+      break;
+    case ID_FILE_NEWLEON:
+      LEON::Generate(NULL);
       break;
     default:
       return DefWindowProc(hWnd, message, wParam, lParam);
