@@ -50,7 +50,7 @@ protected:
 
 private:
   void OnTask5(const std::wstring& params);
-  ChildProcessHost* process_;
+  ChildProcessHost* child_process_host_;
   int routing_id_;
   Delegate* delegate_;
   ObserverList<Observer> observers_;

@@ -3,7 +3,6 @@
 #include "../base/message_loop.h"
 
 #include "child_process.h"
-#include "child_thread_impl.h"
 
 class ChildMainRunnerImpl: public ChildMainRunner {
 public:
@@ -23,8 +22,7 @@ public:
 
     base::PlatformThread::SetName("ChildMainThread");
 
-    ChildProcess child_process;
-    new ChildThreadImpl();
+    new ChildProcess();
 
     MessageLoop::current()->Run();
     return 0;

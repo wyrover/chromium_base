@@ -102,10 +102,9 @@
     <ClCompile Include="child_leon.cc" />
     <ClCompile Include="child_leon_host.cc" />
     <ClCompile Include="child_main_runner.cc" />
-    <ClCompile Include="child_process.cc" />
     <ClCompile Include="child_process_host.cc" />
     <ClCompile Include="child_process_launcher.cc" />
-    <ClCompile Include="child_thread_impl.cc" />
+    <ClCompile Include="child_process.cc" />
     <ClCompile Include="frame_window.cc" />
     <ClCompile Include="leon_generator.cc" />
     <ClCompile Include="main_loop.cc" />
@@ -119,10 +118,9 @@
     <ClInclude Include="child_leon.h" />
     <ClInclude Include="child_leon_host.h" />
     <ClInclude Include="child_main_runner.h" />
-    <ClInclude Include="child_process.h" />
     <ClInclude Include="child_process_host.h" />
     <ClInclude Include="child_process_launcher.h" />
-    <ClInclude Include="child_thread_impl.h" />
+    <ClInclude Include="child_process.h" />
     <ClInclude Include="frame_window.h" />
     <ClInclude Include="from_host_messages.h" />
     <ClInclude Include="leon_generator.h" />

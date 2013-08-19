@@ -42,12 +42,12 @@ bool ChildLeonHost::Observer::Send(IPC::Message* msg) {
 ChildLeonHost::ChildLeonHost(Delegate* delegate,
   ChildProcessHost* child_process_host, int routing_id)
   : delegate_(delegate)
-  , process_(child_process_host)
+  , child_process_host_(child_process_host)
   , routing_id_(routing_id) {
   if (routing_id_ == MSG_ROUTING_NONE) {
-    routing_id_ = process_->GetNextRoutingID();
+    routing_id_ = child_process_host_->GetNextRoutingID();
   }
-  process_->Attach(this, routing_id_);
+  child_process_host_->Attach(this, routing_id_);
 }
 
 ChildLeonHost* ChildLeonHost::FromID(int child_process_id, int child_leon_id) {
@@ -72,7 +72,7 @@ ChildLeonHost* ChildLeonHost::Create(Delegate* delegate,
 }
 
 bool ChildLeonHost::CreateChildLeon() {
-  if (!process_->CreateChildProcess())
+  if (!child_process_host_->CreateChildProcess())
     return false;
   FromHost_ChildLeon_New_Params params;
   params.name = L"leon";
@@ -83,7 +83,7 @@ bool ChildLeonHost::CreateChildLeon() {
 }
 
 bool ChildLeonHost::Send(IPC::Message* msg) {
-  return process_->Send(msg);
+  return child_process_host_->Send(msg);
 }
 
 bool ChildLeonHost::OnMessageReceived(const IPC::Message& message) {

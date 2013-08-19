@@ -25,7 +25,6 @@
     <ClCompile Include="main_loop.cc" />
     <ClCompile Include="thread_impl.cc" />
     <ClCompile Include="frame_window.cc" />
-    <ClCompile Include="child_process.cc" />
     <ClCompile Include="child_process_host.cc" />
     <ClCompile Include="message_filters.cc" />
     <ClCompile Include="child_process_launcher.cc" />
@@ -33,8 +32,8 @@
     <ClCompile Include="messages_generator.cc" />
     <ClCompile Include="leon_generator.cc" />
     <ClCompile Include="child_main_runner.cc" />
-    <ClCompile Include="child_thread_impl.cc" />
     <ClCompile Include="child_leon.cc" />
+    <ClCompile Include="child_process.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base_examples.h" />
@@ -45,7 +44,6 @@
     <ClInclude Include="thread_helper.h" />
     <ClInclude Include="result_codes.h" />
     <ClInclude Include="frame_window.h" />
-    <ClInclude Include="child_process.h" />
     <ClInclude Include="child_process_host.h" />
     <ClInclude Include="message_filters.h" />
     <ClInclude Include="child_process_launcher.h" />
@@ -55,7 +53,7 @@
     <ClInclude Include="messages_generator.h" />
     <ClInclude Include="leon_generator.h" />
     <ClInclude Include="child_main_runner.h" />
-    <ClInclude Include="child_thread_impl.h" />
     <ClInclude Include="child_leon.h" />
+    <ClInclude Include="child_process.h" />
   </ItemGroup>
 </Project>

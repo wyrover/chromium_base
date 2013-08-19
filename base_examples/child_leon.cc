@@ -3,7 +3,7 @@
 #include <map>
 #include "../base/lazy_instance.h"
 
-#include "child_thread_impl.h"
+#include "child_process.h"
 
 typedef std::map<int, ChildLeon*> RoutingIDLeonMap;
 static base::LazyInstance<RoutingIDLeonMap> g_routing_id_leon_map =
@@ -36,7 +36,7 @@ bool ChildLeon::Send(IPC::Message* message) {
   }
   if (message->routing_id() == MSG_ROUTING_NONE)
     message->set_routing_id(routing_id_);
-  return ChildThreadImpl::current()->Send(message);
+  return ChildProcess::current()->Send(message);
 }
 
 bool ChildLeon::OnMessageReceived(const IPC::Message& message) {

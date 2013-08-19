@@ -221,11 +221,6 @@ SubThread::~SubThread() {
 
 void SubThread::Init() {
   ThreadImpl::Init();
-
-  if (ThreadHelper::CurrentlyOn(ThreadHelper::IO)) {
-    base::ThreadRestrictions::SetIOAllowed(false);
-    base::ThreadRestrictions::DisallowWaiting();
-  }
 }
 
 void SubThread::CleanUp() {
