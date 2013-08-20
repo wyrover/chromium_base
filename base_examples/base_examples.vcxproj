@@ -111,6 +111,7 @@
     <ClCompile Include="main_runner.cc" />
     <ClCompile Include="messages_generator.cc" />
     <ClCompile Include="message_filters.cc" />
+    <ClCompile Include="sandbox_policy.cc" />
     <ClCompile Include="thread_impl.cc" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +129,7 @@
     <ClInclude Include="main_runner.h" />
     <ClInclude Include="messages_generator.h" />
     <ClInclude Include="message_filters.h" />
+    <ClInclude Include="sandbox_policy.h" />
     <ClInclude Include="to_host_messages.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="result_codes.h" />

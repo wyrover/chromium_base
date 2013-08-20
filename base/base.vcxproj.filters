@@ -358,6 +358,24 @@
     <ClCompile Include="ipc\ipc_sync_message_filter.cc">
       <Filter>ipc</Filter>
     </ClCompile>
+    <ClCompile Include="sandbox\job.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\restricted_token.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\restricted_token_utils.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\acl.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\sid.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\win_utils.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precompile.h" />
@@ -871,6 +889,27 @@
     </ClInclude>
     <ClInclude Include="nullable_string16.h" />
     <ClInclude Include="auto_reset.h" />
+    <ClInclude Include="sandbox\job.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\restricted_token.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\restricted_token_utils.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\acl.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\security_level.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\sid.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\win_utils.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="json">
@@ -914,6 +953,9 @@
     </Filter>
     <Filter Include="ipc">
       <UniqueIdentifier>{f4c4fa4d-6e68-4986-b89b-0e92210de05f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sandbox">
+      <UniqueIdentifier>{1434c994-ec4d-411f-bc70-8728db51479d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

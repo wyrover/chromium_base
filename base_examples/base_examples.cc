@@ -30,7 +30,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     main_runner->Shutdown();
   } else {
 #ifdef _DEBUG
-    MessageBox(NULL, L"Debug", L"For Debug", MB_OK);
+    MessageBox(NULL, L"For Debugging", L"For Debugging", MB_OK);
 #endif
     scoped_ptr<ChildMainRunner> child_main_runner(ChildMainRunner::Create());
     exit_code = child_main_runner->Initialize();

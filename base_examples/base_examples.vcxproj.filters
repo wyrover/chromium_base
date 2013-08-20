@@ -34,6 +34,7 @@
     <ClCompile Include="child_main_runner.cc" />
     <ClCompile Include="child_leon.cc" />
     <ClCompile Include="child_process.cc" />
+    <ClCompile Include="sandbox_policy.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base_examples.h" />
@@ -55,5 +56,6 @@
     <ClInclude Include="child_main_runner.h" />
     <ClInclude Include="child_leon.h" />
     <ClInclude Include="child_process.h" />
+    <ClInclude Include="sandbox_policy.h" />
   </ItemGroup>
 </Project>

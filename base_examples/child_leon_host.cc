@@ -96,7 +96,7 @@ bool ChildLeonHost::OnMessageReceived(const IPC::Message& message) {
     if (observer->OnMessageReceived(message))
       return true;
   }
-  if (delegate_->OnMessageReceived(this, message))
+  if (delegate_ && delegate_->OnMessageReceived(this, message))
     return true;
 
   bool handled = true;

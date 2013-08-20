@@ -3,6 +3,7 @@
 #include "../base/process.h"
 #include "../base/process_util.h"
 #include "result_codes.h"
+#include "sandbox_policy.h"
 
 ChildProcessLauncher::ChildProcessLauncher(const FilePath& exposed_dir,
   CommandLine* cmdline, Observer* observer)
@@ -37,7 +38,7 @@ void ChildProcessLauncher::LaunchInternal(
   CommandLine* cmd_line) {
     scoped_ptr<CommandLine> cmd_line_deleter(cmd_line);
     base::ProcessHandle handle = base::kNullProcessHandle;
-    base::LaunchProcess(*cmd_line, base::LaunchOptions(), &handle);
+    handle = SandboxPolicy::GetInstance()->StartProcessWithAccess(cmd_line, exposed_dir);
 
     ThreadHelper::PostTask(observer_thread_id, FROM_HERE, base::Bind(
       &ChildProcessLauncher::Notify, this_object.get(), handle));

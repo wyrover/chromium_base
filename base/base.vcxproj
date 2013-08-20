@@ -193,6 +193,12 @@
     <ClCompile Include="rand_util.cc" />
     <ClCompile Include="rand_util_win.cc" />
     <ClCompile Include="run_loop.cc" />
+    <ClCompile Include="sandbox\acl.cc" />
+    <ClCompile Include="sandbox\job.cc" />
+    <ClCompile Include="sandbox\restricted_token.cc" />
+    <ClCompile Include="sandbox\restricted_token_utils.cc" />
+    <ClCompile Include="sandbox\sid.cc" />
+    <ClCompile Include="sandbox\win_utils.cc" />
     <ClCompile Include="sequenced_task_runner.cc" />
     <ClCompile Include="sha1_portable.cc" />
     <ClCompile Include="shared_memory_win.cc" />
@@ -412,6 +418,13 @@
     <ClInclude Include="profiler\tracked_time.h" />
     <ClInclude Include="rand_util.h" />
     <ClInclude Include="run_loop.h" />
+    <ClInclude Include="sandbox\acl.h" />
+    <ClInclude Include="sandbox\job.h" />
+    <ClInclude Include="sandbox\restricted_token.h" />
+    <ClInclude Include="sandbox\restricted_token_utils.h" />
+    <ClInclude Include="sandbox\security_level.h" />
+    <ClInclude Include="sandbox\sid.h" />
+    <ClInclude Include="sandbox\win_utils.h" />
     <ClInclude Include="scoped_observer.h" />
     <ClInclude Include="sequenced_task_runner.h" />
     <ClInclude Include="sequenced_task_runner_helpers.h" />
