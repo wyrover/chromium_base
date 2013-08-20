@@ -17,18 +17,17 @@ public:
     SBOX_ERROR_GENERIC = 1
   };
 
-  SandboxPolicy();
   ~SandboxPolicy();
   static SandboxPolicy* GetInstance();
-  ResultCode MakeJobObject(HANDLE* job);
-
-  void SetJobHandle(HANDLE job);
-  ResultCode SetJobLevel(sandbox::JobLevel job_level, uint32 ui_exceptions);
 
   base::ProcessHandle StartProcessWithAccess(CommandLine* cmd_line,
     const FilePath& exposed_dir);
 
 private:
+  SandboxPolicy();
+  ResultCode MakeJobObject(HANDLE* job);
+  void SetJobHandle(HANDLE job);
+  ResultCode SetJobLevel(sandbox::JobLevel job_level, uint32 ui_exceptions);
   base::win::ScopedHandle job_;
   sandbox::JobLevel job_level_;
   uint32 ui_exceptions_;
