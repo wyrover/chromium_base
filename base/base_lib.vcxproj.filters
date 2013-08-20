@@ -358,6 +358,24 @@
     <ClCompile Include="ipc\ipc_sync_message_filter.cc">
       <Filter>ipc</Filter>
     </ClCompile>
+    <ClCompile Include="sandbox\acl.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\job.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\restricted_token.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\restricted_token_utils.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\sid.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="sandbox\win_utils.cc">
+      <Filter>sandbox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precompile.h" />
@@ -871,6 +889,33 @@
     </ClInclude>
     <ClInclude Include="auto_reset.h" />
     <ClInclude Include="nullable_string16.h" />
+    <ClInclude Include="sandbox\acl.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\internal_types.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\job.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\nt_internals.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\restricted_token.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\restricted_token_utils.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\security_level.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\sid.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="sandbox\win_utils.h">
+      <Filter>sandbox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="json">
@@ -914,6 +959,9 @@
     </Filter>
     <Filter Include="ipc">
       <UniqueIdentifier>{36b12fbe-e4f3-454e-8bc3-6fe7cccc80a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sandbox">
+      <UniqueIdentifier>{ab87937a-5cf2-4644-8423-13771c9d76f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
