@@ -18,4 +18,14 @@ namespace LEON {
 
     clh->NewChildLeon();
   }
+
+  void DelLeon(int routing_id) {
+    if (!ThreadHelper::CurrentlyOn(ThreadHelper::IO)) {
+      ThreadHelper::PostTask(ThreadHelper::IO, FROM_HERE, base::Bind(DelLeon, routing_id));
+      return;
+    }
+
+    CHECK(routing_id <= ChildProcessHost::GetInstance()->ChildLeonCounts());
+    ChildLeonHost::FromID(ChildProcessHost::GetInstance()->GetID(), routing_id)->DelChildLeon();
+  }
 }

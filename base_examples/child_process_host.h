@@ -51,6 +51,8 @@ public:
 
   int GetID() const { return id_; }
 
+  int ChildLeonCounts() const { return child_leon_hosts_.size(); }
+
   bool HasConnection() { return channel_.get() != NULL; }
 
   base::ProcessHandle GetHandle();

@@ -9,5 +9,7 @@ namespace LEON {
     bool create_process_;
   };
   void Generate(const GenerateParams& params);
+
+  void DelLeon(int routing_id);
 }
 #endif

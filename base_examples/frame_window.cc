@@ -66,6 +66,11 @@ LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
         LEON::Generate(params);
       }
       break;
+    case ID_FILE_DELLEON:
+      {
+        LEON::DelLeon(1);
+        break;
+      }
     case ID_FILE_NEWLEONWITHNEWPROCESS:
       {
         LEON::GenerateParams params;
