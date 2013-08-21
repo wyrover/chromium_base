@@ -44,13 +44,6 @@ void FrameWindow::Show() {
   UpdateWindow(window_handle_);
 }
 
-void FrameWindow::DoSomethingOnIOThread(HWND hWnd) {
-  DCHECK(ThreadHelper::CurrentlyOn(ThreadHelper::IO));
-
-  //Do Something
-  //PostMessage(hWnd, WM_DESTROY, 0, 0);
-}
-
 LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
   int wmId, wmEvent;
   PAINTSTRUCT ps;
@@ -63,15 +56,23 @@ LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
     switch (wmId) {
     case IDM_ABOUT:
       DialogBox(g_instance, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-      ThreadHelper::PostDelayedTask(ThreadHelper::IO, FROM_HERE,
-        base::Bind(&DoSomethingOnIOThread, hWnd), base::TimeDelta::FromMilliseconds(5000));
       break;
     case IDM_EXIT:
       DestroyWindow(hWnd);
       break;
     case ID_FILE_NEWLEON:
-      LEON::Generate(NULL);
+      {
+        LEON::GenerateParams params;
+        LEON::Generate(params);
+      }
       break;
+    case ID_FILE_NEWLEONWITHNEWPROCESS:
+      {
+        LEON::GenerateParams params;
+        params.create_process_ = true;
+        LEON::Generate(params);
+        break;
+      }
     default:
       return DefWindowProc(hWnd, message, wParam, lParam);
     }

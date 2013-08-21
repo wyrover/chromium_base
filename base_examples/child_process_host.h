@@ -51,9 +51,15 @@ public:
 
   int GetID() const { return id_; }
 
+  bool HasConnection() { return channel_.get() != NULL; }
+
   base::ProcessHandle GetHandle();
 
   virtual void Cleanup();
+
+  void OnShutdownRequest();
+
+  void ForceShutdown();
 
 protected:
   scoped_ptr<IPC::ChannelProxy> channel_;

@@ -64,6 +64,7 @@ ChildLeonHost* ChildLeonHost::From(ChildLeonHost* clh) {
 
 ChildLeonHost::~ChildLeonHost() {
   FOR_EACH_OBSERVER(ChildLeonHost::Observer, observers_, ChildLeonHostDestroyed());
+  child_process_host_->Release(routing_id_);
 }
 
 ChildLeonHost* ChildLeonHost::Create(Delegate* delegate,
@@ -71,7 +72,7 @@ ChildLeonHost* ChildLeonHost::Create(Delegate* delegate,
   return new ChildLeonHost(delegate, child_process_host, routing_id);
 }
 
-bool ChildLeonHost::CreateChildLeon() {
+bool ChildLeonHost::NewChildLeon() {
   if (!child_process_host_->CreateChildProcess())
     return false;
   FromHost_ChildLeon_New_Params params;
@@ -80,6 +81,12 @@ bool ChildLeonHost::CreateChildLeon() {
   Send(new FromHost_ChildLeon_New(routing_id_, params));
   FOR_EACH_OBSERVER(ChildLeonHost::Observer, observers_, ChildLeonHostInitialized());
   return true;
+}
+
+void ChildLeonHost::DelChildLeon() {
+  if (child_process_host_->HasConnection())
+    Send(new FromHost_ChildLeon_Del(routing_id_));
+  delete this;
 }
 
 bool ChildLeonHost::Send(IPC::Message* msg) {

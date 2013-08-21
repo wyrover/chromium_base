@@ -34,7 +34,15 @@ public:
 
   void OnChildLeonNew(const FromHost_ChildLeon_New_Params& params);
 
+  void OnShutdown();
+
+  void AddRefProcess();
+
+  void ReleaseProcess();
+
 private:
+  int ref_count_;
+
   void Init();
 
   base::WaitableEvent shutdown_event_;

@@ -38,7 +38,8 @@ public:
   ChildLeonHost(Delegate* delegate, ChildProcessHost* child_process_host, int routing_id);
   virtual ~ChildLeonHost();
   static ChildLeonHost* Create(Delegate* delegate, ChildProcessHost* child_process_host, int routing_id);
-  bool CreateChildLeon();
+  bool NewChildLeon();
+  void DelChildLeon();
   virtual bool Send(IPC::Message* msg) OVERRIDE;
   virtual bool OnMessageReceived(const IPC::Message& message) OVERRIDE;
   virtual int GetRoutingID() const { return routing_id_; };

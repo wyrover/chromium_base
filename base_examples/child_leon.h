@@ -16,7 +16,7 @@ public:
 
   virtual bool OnMessageReceived(const IPC::Message& message) OVERRIDE;
 
-  virtual void Close();
+  void OnChildLeonDel();
 
 protected:
   explicit ChildLeon(int routing_id, const std::wstring& name);

@@ -6,6 +6,7 @@
 #include "../base/command_line.h"
 
 #include "from_host_messages.h"
+#include "to_host_messages.h"
 #include "child_leon.h"
 
 base::LazyInstance<base::ThreadLocalPointer<ChildProcess> >
@@ -17,6 +18,7 @@ ChildProcess* ChildProcess::current() {
 
 ChildProcess::ChildProcess()
   : ALLOW_THIS_IN_INITIALIZER_LIST(channel_connected_factory_(this))
+  , ref_count_(0)
   , shutdown_event_(true, false) {
   channel_name_ = CommandLine::ForCurrentProcess()->GetSwitchValueASCII(
     switches::kProcessChannelID);
@@ -66,10 +68,13 @@ bool ChildProcess::OnMessageReceived(const IPC::Message& message) {
   bool handled = true;
   IPC_BEGIN_MESSAGE_MAP(ChildProcess, message)
   IPC_MESSAGE_HANDLER(FromHost_ChildLeon_New, OnChildLeonNew)
+  IPC_MESSAGE_HANDLER(FromHost_ChildProcess_Shutdown, OnShutdown)
   IPC_MESSAGE_UNHANDLED(handled = false)
   IPC_END_MESSAGE_MAP()
-
-  return handled;
+  if (handled)
+    return true;
+  ChildLeon* child_leon = ChildLeon::FromRoutingID(message.routing_id());
+  return child_leon == NULL? false: child_leon->OnMessageReceived(message);
 }
 
 void ChildProcess::OnChannelConnected(int32 peer_pid) {
@@ -80,6 +85,20 @@ void ChildProcess::OnChannelError() {
   MessageLoop::current()->Quit();
 }
 
+void ChildProcess::AddRefProcess() {
+  ++ref_count_;
+}
+
+void ChildProcess::ReleaseProcess() {
+  if (--ref_count_)
+    return;
+  Send(new ToHost_ChildProcess_ShutdownRequest);
+}
+
 void ChildProcess::OnChildLeonNew(const FromHost_ChildLeon_New_Params& params) {
   ChildLeon::Create(params.routing_id, params.name);
+}
+
+void ChildProcess::OnShutdown() {
+  MessageLoop::current()->Quit();
 }

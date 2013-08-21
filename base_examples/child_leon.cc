@@ -2,6 +2,7 @@
 
 #include <map>
 #include "../base/lazy_instance.h"
+#include "from_host_messages.h"
 
 #include "child_process.h"
 
@@ -23,10 +24,11 @@ ChildLeon::ChildLeon(int routing_id, const std::wstring& name)
   , closing_(false)
   , name_(name) {
   g_routing_id_leon_map.Get().insert(std::make_pair(routing_id_, this));
+  ChildProcess::current()->AddRefProcess();
 }
 
 ChildLeon::~ChildLeon() {
-
+  ChildProcess::current()->ReleaseProcess();
 }
 
 bool ChildLeon::Send(IPC::Message* message) {
@@ -42,16 +44,15 @@ bool ChildLeon::Send(IPC::Message* message) {
 bool ChildLeon::OnMessageReceived(const IPC::Message& message) {
   bool handled = true;
   bool msg_is_ok = false;
-  /*IPC_BEGIN_MESSAGE_MAP_EX(ChildLeon, message, msg_is_ok)
-  IPC_MESSAGE_HANDLER()
-  IPC_MESSAGE_UNHANDLED(handled = false)
-  IPC_END_MESSAGE_MAP_EX()*/
+  IPC_BEGIN_MESSAGE_MAP_EX(ChildLeon, message, msg_is_ok)
+    IPC_MESSAGE_HANDLER(FromHost_ChildLeon_Del, OnChildLeonDel)
+    IPC_MESSAGE_UNHANDLED(handled = false)
+  IPC_END_MESSAGE_MAP_EX()
 
-  if (!msg_is_ok)
-    CHECK(false);
   return handled;
 }
 
-void ChildLeon::Close() {
+void ChildLeon::OnChildLeonDel() {
   g_routing_id_leon_map.Get().erase(routing_id_);
+  delete this;
 }

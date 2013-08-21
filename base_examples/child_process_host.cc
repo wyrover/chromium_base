@@ -7,10 +7,12 @@
 #include "../base/ipc/ipc_channel.h"
 #include "../base/ipc/ipc_channel_proxy.h"
 #include "../base/lazy_instance.h"
+#include "../base/message_loop.h"
 
 #include "message_filters.h"
 #include "child_leon_host.h"
 #include "to_host_messages.h"
+#include "from_host_messages.h"
 
 base::LazyInstance<IDMap<ChildProcessHost> >::Leaky
   g_all_hosts = LAZY_INSTANCE_INITIALIZER;
@@ -124,9 +126,9 @@ bool ChildProcessHost::OnMessageReceived(const IPC::Message& message) {
       Send(reply);
     }
     bool msg_is_ok = true;
-    /*IPC_BEGIN_MESSAGE_MAP_EX(ChildProcessHost, message, msg_is_ok)
-      IPC_MESSAGE_HANDLER()
-    IPC_END_MESSAGE_MAP_EX()*/
+    IPC_BEGIN_MESSAGE_MAP_EX(ChildProcessHost, message, msg_is_ok)
+      IPC_MESSAGE_HANDLER(ToHost_ChildProcess_ShutdownRequest, OnShutdownRequest)
+    IPC_END_MESSAGE_MAP_EX()
     return true;
   }
   return ChildLeonHost::From(clh)->OnMessageReceived(message);
@@ -176,6 +178,15 @@ ChildProcessHost* ChildProcessHost::FromID(int child_process_id) {
 void ChildProcessHost::Cleanup() {
   if (!child_leon_hosts_.IsEmpty())
     return;
+  MessageLoop::current()->DeleteSoon(FROM_HERE, this);
   channel_.reset();
   UnregisterHost(GetID());
+}
+
+void ChildProcessHost::OnShutdownRequest() {
+  Send(new FromHost_ChildProcess_Shutdown);
+}
+
+void ChildProcessHost::ForceShutdown() {
+  Send(new FromHost_ChildProcess_Shutdown);
 }

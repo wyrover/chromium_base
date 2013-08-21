@@ -5,7 +5,9 @@ namespace LEON {
   struct GenerateParams {
     GenerateParams();
     ~GenerateParams();
+
+    bool create_process_;
   };
-  void Generate(GenerateParams* params);
+  void Generate(const GenerateParams& params);
 }
 #endif
