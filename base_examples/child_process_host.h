@@ -47,11 +47,11 @@ public:
 
   static ChildProcessHost* FromID(int child_process_id);
 
-  static ChildProcessHost* GetInstance();
-
   int GetID() const { return id_; }
 
   int ChildLeonCounts() const { return child_leon_hosts_.size(); }
+
+  IDMap<ChildLeonHost>& ChildLeonHosts() { return child_leon_hosts_; }
 
   bool HasConnection() { return channel_.get() != NULL; }
 

@@ -3,6 +3,10 @@
 #include "../base/logging.h"
 #include "../base/win/wrapped_window_proc.h"
 #include "../base/bind.h"
+#include "../base/id_map.h"
+#include "../base/process.h"
+#include "../base/process_util.h"
+#include "../base/lazy_instance.h"
 #include "thread_helper.h"
 #include "leon_generator.h"
 
@@ -46,8 +50,6 @@ void FrameWindow::Show() {
 
 LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
   int wmId, wmEvent;
-  PAINTSTRUCT ps;
-  HDC hDc;
 
   switch (message) {
   case WM_COMMAND:
@@ -62,20 +64,23 @@ LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
       break;
     case ID_FILE_NEWLEON:
       {
-        LEON::GenerateParams params;
-        LEON::Generate(params);
+        LEON::NewLeonParams params;
+        params.create_process_ = true;
+        LEON::NewLeon(params);
       }
       break;
     case ID_FILE_DELLEON:
       {
-        LEON::DelLeon(1);
+        LEON::DelLeonParams params;
+        params.routing_id_ = 1;
+        LEON::DelLeon(params);
         break;
       }
     case ID_FILE_NEWLEONWITHNEWPROCESS:
       {
-        LEON::GenerateParams params;
+        LEON::NewLeonParams params;
         params.create_process_ = true;
-        LEON::Generate(params);
+        LEON::NewLeon(params);
         break;
       }
     default:
@@ -83,8 +88,7 @@ LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
     }
     break;
   case WM_PAINT:
-    hDc = BeginPaint(hWnd, &ps);
-    EndPaint(hWnd, &ps);
+    LEON::OnPaint(hWnd);
     break;
   case WM_DESTROY:
     PostQuitMessage(0);

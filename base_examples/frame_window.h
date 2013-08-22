@@ -14,9 +14,9 @@ public:
 
   void Show();
 
-  static FrameWindow* GetInstance();
+  HWND window_handle() { return window_handle_; }
 
-  static void DoSomethingOnIOThread(HWND hWnd);
+  static FrameWindow* GetInstance();
 
   static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 

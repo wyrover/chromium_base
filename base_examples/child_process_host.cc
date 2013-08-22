@@ -13,6 +13,7 @@
 #include "child_leon_host.h"
 #include "to_host_messages.h"
 #include "from_host_messages.h"
+#include "frame_window.h"
 
 base::LazyInstance<IDMap<ChildProcessHost> >::Leaky
   g_all_hosts = LAZY_INSTANCE_INITIALIZER;
@@ -32,13 +33,6 @@ ChildProcessHost::~ChildProcessHost() {
     queued_messages_.pop();
   }
   UnregisterHost(GetID());
-}
-
-ChildProcessHost* ChildProcessHost::GetInstance() {
-  static ChildProcessHost* instance = NULL;
-  if (!instance)
-    instance = new ChildProcessHost;
-  return instance;
 }
 
 bool ChildProcessHost::CreateChildProcess() {
@@ -87,6 +81,7 @@ void ChildProcessHost::OnProcessLaunched() {
     Send(queued_messages_.front());
     queued_messages_.pop();
   }
+  PostMessage(FrameWindow::GetInstance()->window_handle(), WM_PAINT, 0, 0);
 }
 
 base::ProcessHandle ChildProcessHost::GetHandle() {

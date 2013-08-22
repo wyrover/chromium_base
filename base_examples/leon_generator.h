@@ -1,15 +1,25 @@
 #ifndef LEON_GENERATOR_H_
 #define LEON_GENERATOR_H_
 
+#include <Windows.h>
+
 namespace LEON {
-  struct GenerateParams {
-    GenerateParams();
-    ~GenerateParams();
+  struct NewLeonParams {
+    NewLeonParams();
+    ~NewLeonParams();
 
     bool create_process_;
   };
-  void Generate(const GenerateParams& params);
+  struct DelLeonParams {
+    DelLeonParams();
+    ~DelLeonParams();
 
-  void DelLeon(int routing_id);
+    int routing_id_;
+  };
+  void NewLeon(const NewLeonParams& params);
+
+  void DelLeon(const DelLeonParams& params);
+
+  void OnPaint(HWND hWnd);
 }
 #endif
