@@ -91,13 +91,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="base_examples.ico" />
-    <None Include="small.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="base_examples.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="base_examples.cc" />
     <ClCompile Include="child_leon.cc" />
     <ClCompile Include="child_leon_host.cc" />
@@ -129,12 +122,19 @@
     <ClInclude Include="main_runner.h" />
     <ClInclude Include="messages_generator.h" />
     <ClInclude Include="message_filters.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="sandbox_policy.h" />
     <ClInclude Include="to_host_messages.h" />
-    <ClInclude Include="Resource.h" />
     <ClInclude Include="result_codes.h" />
     <ClInclude Include="thread_helper.h" />
     <ClInclude Include="thread_impl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="base_examples.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="base_examples.ico" />
+    <None Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
