@@ -20,8 +20,7 @@ base::LazyInstance<IDMap<ChildProcessHost> >::Leaky
 
 ChildProcessHost::ChildProcessHost()
 : id_(GenerateChildProcessUniqueId())
-, backgrounded_(true)
-, is_initialized_(false) {
+, delete_soon_(false) {
   RegisterHost(GetID(), this);
   g_all_hosts.Get().set_check_on_null_data(true);
 }
@@ -48,9 +47,7 @@ bool ChildProcessHost::CreateChildProcess() {
 
   CommandLine* cmd_line = new CommandLine(GetChildPath());
   cmd_line->AppendSwitchASCII(switches::kProcessChannelID, channel_id);
-  child_process_launcher_ = new ChildProcessLauncher(FilePath(), cmd_line, this);
-
-  is_initialized_ = true;
+  child_process_launcher_ = new ChildProcessLauncher(cmd_line, this);
   return true;
 }
 
@@ -81,34 +78,25 @@ void ChildProcessHost::OnProcessLaunched() {
     Send(queued_messages_.front());
     queued_messages_.pop();
   }
-  PostMessage(FrameWindow::GetInstance()->window_handle(), WM_PAINT, 0, 0);
+  InvalidateRect(FrameWindow::GetInstance()->window_handle(), NULL, TRUE);
 }
 
 base::ProcessHandle ChildProcessHost::GetHandle() {
-  if (!child_process_launcher_.get() || child_process_launcher_->IsStarting())
-    return base::kNullProcessHandle;
   return child_process_launcher_->GetHandle();
 }
 
 bool ChildProcessHost::Send(IPC::Message* msg) {
   if (!channel_.get()) {
-    if (!is_initialized_) {
-      queued_messages_.push(msg);
-      return true;
-    } else {
-      delete msg;
-      return false;
-    }
-  }
-
-  if (child_process_launcher_.get() && child_process_launcher_->IsStarting()) {
     queued_messages_.push(msg);
     return true;
   }
+
   return channel_->Send(msg);
 }
 
 bool ChildProcessHost::OnMessageReceived(const IPC::Message& message) {
+  if (delete_soon_)
+    return false;
   if (message.routing_id() == MSG_ROUTING_CONTROL) {
     return true;
   }
@@ -126,20 +114,14 @@ bool ChildProcessHost::OnMessageReceived(const IPC::Message& message) {
     IPC_END_MESSAGE_MAP_EX()
     return true;
   }
-  return ChildLeonHost::From(clh)->OnMessageReceived(message);
+  return clh->OnMessageReceived(message);
 }
 
 void ChildProcessHost::OnChannelConnected(int32 peer_pid) {
 }
 
 void ChildProcessHost::OnChannelError() {
-  child_process_launcher_->Release();
-  channel_.reset();
-  IDMap<ChildLeonHost>::iterator it(&child_leon_hosts_);
-  while(!it.IsAtEnd()) {
-    ChildLeonHost::From(it.GetCurrentValue())->OnMessageReceived(ToHost_ChildLeonGone(it.GetCurrentKey()));
-    it.Advance();
-  }
+  ShutdownChildProcess();
 }
 
 void ChildProcessHost::Attach(ChildLeonHost* child_leon_host, int routing_id) {
@@ -174,14 +156,19 @@ void ChildProcessHost::Cleanup() {
   if (!child_leon_hosts_.IsEmpty())
     return;
   MessageLoop::current()->DeleteSoon(FROM_HERE, this);
+  delete_soon_ = true;
   channel_.reset();
   UnregisterHost(GetID());
 }
 
 void ChildProcessHost::OnShutdownRequest() {
-  Send(new FromHost_ChildProcess_Shutdown);
+  ShutdownChildProcess();
 }
 
-void ChildProcessHost::ForceShutdown() {
-  Send(new FromHost_ChildProcess_Shutdown);
+void ChildProcessHost::ShutdownChildProcess() {
+  IDMap<ChildLeonHost>::iterator it(&child_leon_hosts_);
+  while(!it.IsAtEnd()) {
+    it.GetCurrentValue()->DelChildLeon();
+    it.Advance();
+  }
 }

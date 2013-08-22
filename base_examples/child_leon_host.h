@@ -11,7 +11,6 @@ class ChildProcessHost;
 class ChildLeonHost: public IPC::Sender, public IPC::Listener {
 public:
   static ChildLeonHost* FromID(int child_process_id, int child_leon_id);
-  static ChildLeonHost* From(ChildLeonHost* clh);
 
   class Delegate {
   public:
@@ -45,12 +44,13 @@ public:
   virtual int GetRoutingID() const { return routing_id_; };
   virtual Delegate* GetDelegate() { return delegate_; }
 
+  void OnTask5(const std::wstring& params);
+
 protected:
   void AddObserver(Observer* observer);
   void RemoveObserver(Observer* observer);
 
 private:
-  void OnTask5(const std::wstring& params);
   ChildProcessHost* child_process_host_;
   int routing_id_;
   Delegate* delegate_;

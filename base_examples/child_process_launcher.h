@@ -16,15 +16,12 @@ public:
     virtual ~Observer() {}
   };
 
-  explicit ChildProcessLauncher(const FilePath& exposed_dir,
-    CommandLine* cmdline, Observer* observer);
+  explicit ChildProcessLauncher(CommandLine* cmdline, Observer* observer);
   ~ChildProcessLauncher();
-
-  bool IsStarting();
 
   base::ProcessHandle GetHandle();
 
-  void Launch(const FilePath& exposed_dir, CommandLine* cmdline);
+  void Launch(CommandLine* cmdline);
 
   void Terminate();
 
@@ -32,7 +29,7 @@ private:
   void Notify(base::ProcessHandle handle);
 
   static void LaunchInternal(scoped_refptr<ChildProcessLauncher> this_object,
-    ThreadHelper::ID observer_thread_id, const FilePath& exposed_dir, CommandLine* cmd_line);
+    ThreadHelper::ID observer_thread_id, CommandLine* cmd_line);
 
   static void TerminateInternal(base::ProcessHandle handle);
 
@@ -40,9 +37,7 @@ private:
 
   ThreadHelper::ID observer_thread_id_;
 
-  base::Process process_;
-
-  bool starting_;
+  base::Process child_process_;
 
   DISALLOW_COPY_AND_ASSIGN(ChildProcessLauncher);
 };

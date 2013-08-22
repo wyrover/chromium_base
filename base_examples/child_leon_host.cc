@@ -4,6 +4,7 @@
 #include "message_filters.h"
 #include "from_host_messages.h"
 #include "to_host_messages.h"
+#include "frame_window.h"
 
 bool ChildLeonHost::Delegate::OnMessageReceived(ChildLeonHost* child_leon_host,
   const IPC::Message& message) {
@@ -58,10 +59,6 @@ ChildLeonHost* ChildLeonHost::FromID(int child_process_id, int child_leon_id) {
   return clh;
 }
 
-ChildLeonHost* ChildLeonHost::From(ChildLeonHost* clh) {
-  return clh;
-}
-
 ChildLeonHost::~ChildLeonHost() {
   FOR_EACH_OBSERVER(ChildLeonHost::Observer, observers_, ChildLeonHostDestroyed());
   child_process_host_->Release(routing_id_);
@@ -80,13 +77,15 @@ bool ChildLeonHost::NewChildLeon() {
   params.routing_id = routing_id_;
   Send(new FromHost_ChildLeon_New(routing_id_, params));
   FOR_EACH_OBSERVER(ChildLeonHost::Observer, observers_, ChildLeonHostInitialized());
+  InvalidateRect(FrameWindow::GetInstance()->window_handle(), NULL, TRUE);
   return true;
 }
 
 void ChildLeonHost::DelChildLeon() {
-  if (child_process_host_->HasConnection())
+  if (child_process_host_->HasConnection() && child_process_host_->ChildLeonHosts().size() > 1)
     Send(new FromHost_ChildLeon_Del(routing_id_));
   delete this;
+  InvalidateRect(FrameWindow::GetInstance()->window_handle(), NULL, TRUE);
 }
 
 bool ChildLeonHost::Send(IPC::Message* msg) {

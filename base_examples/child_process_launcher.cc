@@ -5,60 +5,50 @@
 #include "result_codes.h"
 #include "sandbox_policy.h"
 
-ChildProcessLauncher::ChildProcessLauncher(const FilePath& exposed_dir,
-  CommandLine* cmdline, Observer* observer)
+ChildProcessLauncher::ChildProcessLauncher( CommandLine* cmdline, Observer* observer)
   : observer_(observer)
-  , starting_(true)
   , observer_thread_id_(ThreadHelper::UI) {
-  Launch(exposed_dir, cmdline);
+  DCHECK(observer);
+  Launch(cmdline);
 }
 
 ChildProcessLauncher::~ChildProcessLauncher() {
   Terminate();
 }
 
-bool ChildProcessLauncher::IsStarting() {
-  return starting_;
-}
-
 base::ProcessHandle ChildProcessLauncher::GetHandle() {
-  return process_.handle();
+  return child_process_.handle();
 }
 
-void ChildProcessLauncher::Launch(const FilePath& exposed_dir, CommandLine* cmdline) {
+void ChildProcessLauncher::Launch(CommandLine* cmdline) {
   ThreadHelper::PostTask(ThreadHelper::FILE, FROM_HERE, base::Bind(
     &ChildProcessLauncher::LaunchInternal, make_scoped_refptr(this),
-    observer_thread_id_, exposed_dir, cmdline));
+    observer_thread_id_, cmdline));
 }
 
 void ChildProcessLauncher::LaunchInternal(
   scoped_refptr<ChildProcessLauncher> this_object,
   ThreadHelper::ID observer_thread_id,
-  const FilePath& exposed_dir,
   CommandLine* cmd_line) {
     scoped_ptr<CommandLine> cmd_line_deleter(cmd_line);
-    base::ProcessHandle handle = base::kNullProcessHandle;
-    handle = SandboxPolicy::GetInstance()->StartProcessWithAccess(cmd_line, exposed_dir);
+    base::ProcessHandle handle =
+      SandboxPolicy::GetInstance()->StartProcessInJob(cmd_line);
 
     ThreadHelper::PostTask(observer_thread_id, FROM_HERE, base::Bind(
       &ChildProcessLauncher::Notify, this_object.get(), handle));
 }
 
 void ChildProcessLauncher::Notify(base::ProcessHandle handle) {
-  starting_ = false;
-  process_.set_handle(handle);
-  if (observer_)
-    observer_->OnProcessLaunched();
-  else
-    Terminate();
+  child_process_.set_handle(handle);
+  observer_->OnProcessLaunched();
 }
 
 void ChildProcessLauncher::Terminate() {
-  if (!process_.handle())
+  if (!child_process_.handle())
     return;
   ThreadHelper::PostTask(ThreadHelper::FILE, FROM_HERE, base::Bind(
-    &ChildProcessLauncher::TerminateInternal, process_.handle()));
-  process_.set_handle(base::kNullProcessHandle);
+    &ChildProcessLauncher::TerminateInternal, child_process_.handle()));
+  child_process_.set_handle(base::kNullProcessHandle);
 }
 
 void ChildProcessLauncher::TerminateInternal(base::ProcessHandle handle) {

@@ -19,6 +19,8 @@ public:
 
   bool CreateChildProcess();
 
+  void ShutdownChildProcess();
+
   virtual int GetNextRoutingID();
 
   virtual bool Send(IPC::Message* msg) OVERRIDE;
@@ -49,8 +51,6 @@ public:
 
   int GetID() const { return id_; }
 
-  int ChildLeonCounts() const { return child_leon_hosts_.size(); }
-
   IDMap<ChildLeonHost>& ChildLeonHosts() { return child_leon_hosts_; }
 
   bool HasConnection() { return channel_.get() != NULL; }
@@ -60,8 +60,6 @@ public:
   virtual void Cleanup();
 
   void OnShutdownRequest();
-
-  void ForceShutdown();
 
 protected:
   scoped_ptr<IPC::ChannelProxy> channel_;
@@ -73,9 +71,7 @@ private:
 
   int id_;
 
-  bool is_initialized_;
-
-  bool backgrounded_;
+  bool delete_soon_;
 
   std::queue<IPC::Message*> queued_messages_;
 

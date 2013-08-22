@@ -13,18 +13,29 @@ namespace LEON {
   NewLeonParams::NewLeonParams(): create_process_(false) {}
   NewLeonParams::~NewLeonParams() {}
 
-  DelLeonParams::DelLeonParams(): routing_id_(0) {}
+  DelLeonParams::DelLeonParams(): routing_id_(0), child_process_id_(0) {}
   DelLeonParams::~DelLeonParams() {}
 
-  void NewLeon(const NewLeonParams& params) {
-    ChildLeonHost* clh = ChildLeonHost::Create(NULL, new ChildProcessHost, MSG_ROUTING_NONE);
+  ShutdownParams::ShutdownParams(): child_process_id_(0) {}
+  ShutdownParams::~ShutdownParams() {}
 
-    clh->NewChildLeon();
+  void NewLeon(const NewLeonParams& params) {
+    if (params.create_process_
+      || (!params.create_process_ && g_all_hosts.Get().IsEmpty())) {
+      ChildLeonHost::Create(NULL, new ChildProcessHost,
+      MSG_ROUTING_NONE)->NewChildLeon();
+    } else {
+      IDMap<ChildProcessHost>::iterator iter(g_all_hosts.Pointer());
+      ChildLeonHost::Create(NULL, iter.GetCurrentValue(), MSG_ROUTING_NONE)->NewChildLeon();
+    }
   }
 
   void DelLeon(const DelLeonParams& params) {
-    ChildProcessHost* cph = ChildProcessHost::FromID(1);
-    ChildLeonHost::FromID(cph->GetID(), params.routing_id_)->DelChildLeon();
+    ChildLeonHost::FromID(params.child_process_id_, params.routing_id_)->DelChildLeon();
+  }
+
+  void Shutdown(const ShutdownParams& params) {
+    ChildProcessHost::FromID(params.child_process_id_)->ShutdownChildProcess();
   }
 
   void OnPaint(HWND hWnd) {
@@ -50,12 +61,13 @@ namespace LEON {
         sub_strs.append(sub_text_buf);
         sub_iter.Advance();
       }
-
-      swprintf_s(text_buf, L"ChildProcessHost: %d, ChildProcess: %d, ChildLeonHost: %s",
-        cph->GetID(), base::GetProcId(cph->GetHandle()), sub_strs.c_str());
-      strs = text_buf;
-      stepY++;
-      TextOut(hDc, 10, 10 + 30*stepY, strs.c_str(), strs.length());
+      if (cph->GetHandle() != base::kNullProcessHandle) {
+        swprintf_s(text_buf, L"ChildProcessHost: %d, ChildProcess: %d, ChildLeonHost: %s",
+          cph->GetID(), base::GetProcId(cph->GetHandle()), sub_strs.c_str());
+        strs = text_buf;
+        stepY++;
+        TextOut(hDc, 10, 10 + 30*stepY, strs.c_str(), strs.length());
+      }
       iter.Advance();
     }
     EndPaint(hWnd, &ps);

@@ -13,4 +13,3 @@ IPC_STRUCT_END()
 
 IPC_MESSAGE_ROUTED1(FromHost_ChildLeon_New, FromHost_ChildLeon_New_Params)
 IPC_MESSAGE_ROUTED0(FromHost_ChildLeon_Del)
-IPC_MESSAGE_CONTROL0(FromHost_ChildProcess_Shutdown)

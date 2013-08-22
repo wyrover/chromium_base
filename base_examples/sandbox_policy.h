@@ -20,8 +20,7 @@ public:
   ~SandboxPolicy();
   static SandboxPolicy* GetInstance();
 
-  base::ProcessHandle StartProcessWithAccess(CommandLine* cmd_line,
-    const FilePath& exposed_dir);
+  base::ProcessHandle StartProcessInJob(CommandLine* cmd_line);
 
 private:
   SandboxPolicy();

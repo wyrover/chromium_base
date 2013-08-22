@@ -61,9 +61,7 @@ SandboxPolicy::ResultCode SandboxPolicy::SetJobLevel(sandbox::JobLevel job_level
   return SBOX_ALL_OK;
 }
 
-base::ProcessHandle SandboxPolicy::StartProcessWithAccess(CommandLine* cmd_line,
-  const FilePath& exposed_dir) {
-
+base::ProcessHandle SandboxPolicy::StartProcessInJob(CommandLine* cmd_line) {
   DWORD flags = CREATE_SUSPENDED|CREATE_UNICODE_ENVIRONMENT|DETACHED_PROCESS;
   if (base::win::GetVersion() < base::win::VERSION_WIN8) {
     flags |= CREATE_BREAKAWAY_FROM_JOB;

@@ -68,7 +68,6 @@ bool ChildProcess::OnMessageReceived(const IPC::Message& message) {
   bool handled = true;
   IPC_BEGIN_MESSAGE_MAP(ChildProcess, message)
   IPC_MESSAGE_HANDLER(FromHost_ChildLeon_New, OnChildLeonNew)
-  IPC_MESSAGE_HANDLER(FromHost_ChildProcess_Shutdown, OnShutdown)
   IPC_MESSAGE_UNHANDLED(handled = false)
   IPC_END_MESSAGE_MAP()
   if (handled)
@@ -97,8 +96,4 @@ void ChildProcess::ReleaseProcess() {
 
 void ChildProcess::OnChildLeonNew(const FromHost_ChildLeon_New_Params& params) {
   ChildLeon::Create(params.routing_id, params.name);
-}
-
-void ChildProcess::OnShutdown() {
-  MessageLoop::current()->Quit();
 }

@@ -14,11 +14,19 @@ namespace LEON {
     DelLeonParams();
     ~DelLeonParams();
 
+    int child_process_id_;
     int routing_id_;
+  };
+  struct ShutdownParams {
+    ShutdownParams();
+    ~ShutdownParams();
+    int child_process_id_;
   };
   void NewLeon(const NewLeonParams& params);
 
   void DelLeon(const DelLeonParams& params);
+
+  void Shutdown(const ShutdownParams& params);
 
   void OnPaint(HWND hWnd);
 }

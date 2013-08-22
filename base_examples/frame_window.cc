@@ -65,14 +65,15 @@ LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
     case ID_FILE_NEWLEON:
       {
         LEON::NewLeonParams params;
-        params.create_process_ = true;
+        params.create_process_ = false;
         LEON::NewLeon(params);
+        break;
       }
-      break;
     case ID_FILE_DELLEON:
       {
         LEON::DelLeonParams params;
         params.routing_id_ = 1;
+        params.child_process_id_ = 1;
         LEON::DelLeon(params);
         break;
       }
@@ -81,6 +82,13 @@ LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
         LEON::NewLeonParams params;
         params.create_process_ = true;
         LEON::NewLeon(params);
+        break;
+      }
+    case ID_FILE_SHUTDOWNPROCESS:
+      {
+        LEON::ShutdownParams params;
+        params.child_process_id_ = 1;
+        LEON::Shutdown(params);
         break;
       }
     default:
