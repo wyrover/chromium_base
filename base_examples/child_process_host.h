@@ -59,8 +59,6 @@ public:
 
   virtual void Cleanup();
 
-  void OnShutdownRequest();
-
 protected:
   scoped_ptr<IPC::ChannelProxy> channel_;
 

@@ -68,6 +68,8 @@ FilePath ChildProcessHost::GetChildPath() {
 }
 
 void ChildProcessHost::OnProcessLaunched() {
+  if (delete_soon_)
+    return;
   if (child_process_launcher_.get()) {
     if (!child_process_launcher_->GetHandle()) {
       OnChannelError();
@@ -109,9 +111,9 @@ bool ChildProcessHost::OnMessageReceived(const IPC::Message& message) {
       Send(reply);
     }
     bool msg_is_ok = true;
-    IPC_BEGIN_MESSAGE_MAP_EX(ChildProcessHost, message, msg_is_ok)
-      IPC_MESSAGE_HANDLER(ToHost_ChildProcess_ShutdownRequest, OnShutdownRequest)
-    IPC_END_MESSAGE_MAP_EX()
+    /*IPC_BEGIN_MESSAGE_MAP_EX(ChildProcessHost, message, msg_is_ok)
+      IPC_MESSAGE_HANDLER()
+    IPC_END_MESSAGE_MAP_EX()*/
     return true;
   }
   return clh->OnMessageReceived(message);
@@ -159,10 +161,6 @@ void ChildProcessHost::Cleanup() {
   delete_soon_ = true;
   channel_.reset();
   UnregisterHost(GetID());
-}
-
-void ChildProcessHost::OnShutdownRequest() {
-  ShutdownChildProcess();
 }
 
 void ChildProcessHost::ShutdownChildProcess() {

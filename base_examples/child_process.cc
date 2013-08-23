@@ -91,7 +91,7 @@ void ChildProcess::AddRefProcess() {
 void ChildProcess::ReleaseProcess() {
   if (--ref_count_)
     return;
-  Send(new ToHost_ChildProcess_ShutdownRequest);
+  // delete this;
 }
 
 void ChildProcess::OnChildLeonNew(const FromHost_ChildLeon_New_Params& params) {
