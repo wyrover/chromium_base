@@ -7,8 +7,8 @@ namespace LEON {
   struct NewLeonParams {
     NewLeonParams();
     ~NewLeonParams();
-
-    bool create_process_;
+    // 0 for create new child process
+    int child_process_id_;
   };
   struct DelLeonParams {
     DelLeonParams();

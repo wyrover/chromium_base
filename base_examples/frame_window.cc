@@ -64,22 +64,11 @@ LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
       DestroyWindow(hWnd);
       break;
     case ID_FILE_NEWLEON:
-      {
-        LEON::NewLeonParams params;
-        params.create_process_ = false;
-        LEON::NewLeon(params);
-        break;
-      }
+      DialogBox(g_instance, MAKEINTRESOURCE(IDD_NEWLEON), hWnd, NewLeon);
+      break;
     case ID_FILE_DELLEON:
       DialogBox(g_instance, MAKEINTRESOURCE(IDD_DELLEON), hWnd, DelLeon);
       break;
-    case ID_FILE_NEWLEONWITHNEWPROCESS:
-      {
-        LEON::NewLeonParams params;
-        params.create_process_ = true;
-        LEON::NewLeon(params);
-        break;
-      }
     case ID_FILE_SHUTDOWNPROCESS:
       DialogBox(g_instance, MAKEINTRESOURCE(IDD_SHUTDOWN), hWnd, Shutdown);
       break;
@@ -112,11 +101,37 @@ INT_PTR FrameWindow::About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam
   return (INT_PTR)FALSE;
 }
 
-INT_PTR FrameWindow::DelLeon(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-  static const unsigned int ContentSize = 100;
+INT_PTR FrameWindow::NewLeon(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
   switch(message) {
   case WM_INITDIALOG:
-    return (INT_PTR)TRUE;
+    SetFocus(GetDlgItem(hDlg, IDC_EDIT1));
+    break;
+  case WM_COMMAND:
+    if (LOWORD(wParam) == IDOK) {
+      LEON::NewLeonParams params;
+
+      wchar_t szContents[ContentSize] = {0};
+      int content = 0;
+
+      GetWindowText(GetDlgItem(hDlg, IDC_EDIT1), szContents, ContentSize);
+      base::StringToInt(std::wstring(szContents), &content);
+      params.child_process_id_ = content;
+
+      EndDialog(hDlg, LOWORD(wParam));
+      LEON::NewLeon(params);
+    } else if (LOWORD(wParam) == IDCANCEL) {
+      EndDialog(hDlg, LOWORD(wParam));
+    }
+    break;
+  }
+  return (INT_PTR)FALSE;
+}
+
+INT_PTR FrameWindow::DelLeon(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+  switch(message) {
+  case WM_INITDIALOG:
+    SetFocus(GetDlgItem(hDlg, IDC_EDIT1));
+    break;
   case WM_COMMAND:
     if (LOWORD(wParam) == IDOK) {
       LEON::DelLeonParams params;
@@ -135,6 +150,8 @@ INT_PTR FrameWindow::DelLeon(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 
       EndDialog(hDlg, LOWORD(wParam));
       LEON::DelLeon(params);
+    } else if (LOWORD(wParam) == IDCANCEL) {
+      EndDialog(hDlg, LOWORD(wParam));
     }
     break;
   }
@@ -142,10 +159,10 @@ INT_PTR FrameWindow::DelLeon(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 }
 
 INT_PTR FrameWindow::Shutdown(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-  static const unsigned int ContentSize = 100;
   switch(message) {
   case WM_INITDIALOG:
-    return (INT_PTR)TRUE;
+    SetFocus(GetDlgItem(hDlg, IDC_EDIT1));
+    break;
   case WM_COMMAND:
     if (LOWORD(wParam) == IDOK) {
       LEON::ShutdownParams params;
@@ -159,6 +176,8 @@ INT_PTR FrameWindow::Shutdown(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPa
 
       EndDialog(hDlg, LOWORD(wParam));
       LEON::Shutdown(params);
+    } else if (LOWORD(wParam) == IDCANCEL) {
+      EndDialog(hDlg, LOWORD(wParam));
     }
   }
   return (INT_PTR)FALSE;

@@ -10,7 +10,7 @@
 extern base::LazyInstance<IDMap<ChildProcessHost> >::Leaky g_all_hosts;
 
 namespace LEON {
-  NewLeonParams::NewLeonParams(): create_process_(false) {}
+  NewLeonParams::NewLeonParams(): child_process_id_(0) {}
   NewLeonParams::~NewLeonParams() {}
 
   DelLeonParams::DelLeonParams(): routing_id_(0), child_process_id_(0) {}
@@ -20,14 +20,8 @@ namespace LEON {
   ShutdownParams::~ShutdownParams() {}
 
   void NewLeon(const NewLeonParams& params) {
-    if (params.create_process_
-      || (!params.create_process_ && g_all_hosts.Get().IsEmpty())) {
-      ChildLeonHost::Create(NULL, new ChildProcessHost,
-      MSG_ROUTING_NONE)->NewChildLeon();
-    } else {
-      IDMap<ChildProcessHost>::iterator iter(g_all_hosts.Pointer());
-      ChildLeonHost::Create(NULL, iter.GetCurrentValue(), MSG_ROUTING_NONE)->NewChildLeon();
-    }
+    ChildProcessHost* cph = ChildProcessHost::FromID(params.child_process_id_);
+    ChildLeonHost::Create(NULL, cph? cph : new ChildProcessHost, MSG_ROUTING_NONE)->NewChildLeon();
   }
 
   void DelLeon(const DelLeonParams& params) {

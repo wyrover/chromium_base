@@ -13,8 +13,9 @@
 #define IDC_BASE_EXAMPLES               109
 #define IDR_MAINFRAME                   128
 #define IDD_DELLEON                     129
-#define IDD_DIALOG1                     130
 #define IDD_SHUTDOWN                    130
+#define IDD_DELLEON1                    131
+#define IDD_NEWLEON                     131
 #define IDC_STATIC1                     1000
 #define IDC_STATIC2                     1001
 #define IDC_EDIT1                       1002
