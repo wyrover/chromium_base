@@ -7,6 +7,7 @@
 #include "../base/process.h"
 #include "../base/process_util.h"
 #include "../base/lazy_instance.h"
+#include "../base/string_number_conversions.h"
 #include "thread_helper.h"
 #include "leon_generator.h"
 
@@ -70,13 +71,8 @@ LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
         break;
       }
     case ID_FILE_DELLEON:
-      {
-        LEON::DelLeonParams params;
-        params.routing_id_ = 1;
-        params.child_process_id_ = 1;
-        LEON::DelLeon(params);
-        break;
-      }
+      DialogBox(g_instance, MAKEINTRESOURCE(IDD_DELLEON), hWnd, DelLeon);
+      break;
     case ID_FILE_NEWLEONWITHNEWPROCESS:
       {
         LEON::NewLeonParams params;
@@ -85,12 +81,8 @@ LRESULT FrameWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
         break;
       }
     case ID_FILE_SHUTDOWNPROCESS:
-      {
-        LEON::ShutdownParams params;
-        params.child_process_id_ = 1;
-        LEON::Shutdown(params);
-        break;
-      }
+      DialogBox(g_instance, MAKEINTRESOURCE(IDD_SHUTDOWN), hWnd, Shutdown);
+      break;
     default:
       return DefWindowProc(hWnd, message, wParam, lParam);
     }
@@ -116,6 +108,58 @@ INT_PTR FrameWindow::About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam
       EndDialog(hDlg, LOWORD(wParam));
     }
     break;
+  }
+  return (INT_PTR)FALSE;
+}
+
+INT_PTR FrameWindow::DelLeon(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+  static const unsigned int ContentSize = 100;
+  switch(message) {
+  case WM_INITDIALOG:
+    return (INT_PTR)TRUE;
+  case WM_COMMAND:
+    if (LOWORD(wParam) == IDOK) {
+      LEON::DelLeonParams params;
+
+      wchar_t szContents[ContentSize] = {0};
+      int content = 0;
+
+      GetWindowText(GetDlgItem(hDlg, IDC_EDIT1), szContents, ContentSize);
+      base::StringToInt(std::wstring(szContents), &content);
+      params.child_process_id_ = content;
+
+      memset(szContents, 0, sizeof szContents);
+      GetWindowText(GetDlgItem(hDlg, IDC_EDIT2), szContents, ContentSize);
+      base::StringToInt(std::wstring(szContents), &content);
+      params.routing_id_ = content;
+
+      EndDialog(hDlg, LOWORD(wParam));
+      LEON::DelLeon(params);
+    }
+    break;
+  }
+  return (INT_PTR)FALSE;
+}
+
+INT_PTR FrameWindow::Shutdown(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+  static const unsigned int ContentSize = 100;
+  switch(message) {
+  case WM_INITDIALOG:
+    return (INT_PTR)TRUE;
+  case WM_COMMAND:
+    if (LOWORD(wParam) == IDOK) {
+      LEON::ShutdownParams params;
+
+      wchar_t szContents[ContentSize] = {0};
+      int content = 0;
+
+      GetWindowText(GetDlgItem(hDlg, IDC_EDIT1), szContents, ContentSize);
+      base::StringToInt(std::wstring(szContents), &content);
+      params.child_process_id_ = content;
+
+      EndDialog(hDlg, LOWORD(wParam));
+      LEON::Shutdown(params);
+    }
   }
   return (INT_PTR)FALSE;
 }

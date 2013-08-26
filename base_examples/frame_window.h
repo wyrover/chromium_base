@@ -22,6 +22,10 @@ public:
 
   static INT_PTR CALLBACK About(HWND, UINT, WPARAM, LPARAM);
 
+  static INT_PTR CALLBACK DelLeon(HWND, UINT, WPARAM, LPARAM);
+
+  static INT_PTR CALLBACK Shutdown(HWND, UINT, WPARAM, LPARAM);
+
 private:
   wchar_t title_[MAX_LOADSTRING];
 
