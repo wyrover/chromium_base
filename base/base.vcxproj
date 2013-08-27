@@ -202,6 +202,19 @@
     <ClCompile Include="sequenced_task_runner.cc" />
     <ClCompile Include="sha1_portable.cc" />
     <ClCompile Include="shared_memory_win.cc" />
+    <ClCompile Include="sql\connection.cc" />
+    <ClCompile Include="sql\error_delegate_util.cc" />
+    <ClCompile Include="sql\meta_table.cc" />
+    <ClCompile Include="sql\sqlite3.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="sql\statement.cc" />
+    <ClCompile Include="sql\transaction.cc" />
     <ClCompile Include="stringprintf.cc" />
     <ClCompile Include="string_number_conversions.cc" />
     <ClCompile Include="string_piece.cc" />
@@ -431,6 +444,14 @@
     <ClInclude Include="sha1.h" />
     <ClInclude Include="shared_memory.h" />
     <ClInclude Include="single_thread_task_runner.h" />
+    <ClInclude Include="sql\connection.h" />
+    <ClInclude Include="sql\diagnostic_error_delegate.h" />
+    <ClInclude Include="sql\error_delegate_util.h" />
+    <ClInclude Include="sql\init_status.h" />
+    <ClInclude Include="sql\meta_table.h" />
+    <ClInclude Include="sql\sqlite3.h" />
+    <ClInclude Include="sql\statement.h" />
+    <ClInclude Include="sql\transaction.h" />
     <ClInclude Include="stl_util.h" />
     <ClInclude Include="string16.h" />
     <ClInclude Include="stringprintf.h" />
