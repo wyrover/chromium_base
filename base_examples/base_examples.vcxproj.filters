@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="base_examples.cc" />
     <ClCompile Include="main_runner.cc" />
-    <ClCompile Include="main_loop.cc" />
     <ClCompile Include="thread_impl.cc" />
     <ClCompile Include="frame_window.cc" />
     <ClCompile Include="child_process_host.cc" />
@@ -16,11 +15,12 @@
     <ClCompile Include="child_leon.cc" />
     <ClCompile Include="child_process.cc" />
     <ClCompile Include="sandbox_policy.cc" />
+    <ClCompile Include="main_process.cc" />
+    <ClCompile Include="database_service.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base_examples.h" />
     <ClInclude Include="main_runner.h" />
-    <ClInclude Include="main_loop.h" />
     <ClInclude Include="thread_impl.h" />
     <ClInclude Include="thread_helper.h" />
     <ClInclude Include="result_codes.h" />
@@ -38,6 +38,8 @@
     <ClInclude Include="child_process.h" />
     <ClInclude Include="sandbox_policy.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="main_process.h" />
+    <ClInclude Include="database_service.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="base_examples.rc" />

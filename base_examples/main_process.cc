@@ -1,21 +1,26 @@
-#include "main_loop.h"
+#include "main_process.h"
 #include "../base/message_loop.h"
 #include "../base/bind.h"
 #include "../base/run_loop.h"
 #include "../base/threading/thread_restrictions.h"
 #include "result_codes.h"
 #include "thread_impl.h"
+#include "database_service.h"
 
-MainLoop::MainLoop()
+MainProcess* g_main_process = NULL;
+
+MainProcess::MainProcess()
   : result_code_(RESULT_CODE_NORMAL_EXIT) {
+    g_main_process = this;
 }
 
-MainLoop::~MainLoop() {
+MainProcess::~MainProcess() {
+  g_main_process = NULL;
 }
 
-void MainLoop::Init() {}
+void MainProcess::Init() {}
 
-void MainLoop::StartMainMessageLoop() {
+void MainProcess::StartMainMessageLoop() {
   if (!MessageLoop::current())
     main_message_loop_.reset(new MessageLoop(MessageLoop::TYPE_UI));
 
@@ -27,7 +32,7 @@ void MainLoop::StartMainMessageLoop() {
   main_thread_.reset(new ThreadImpl(ThreadHelper::UI, MessageLoop::current()));
 }
 
-void MainLoop::CreateThreads() {
+void MainProcess::CreateThreads() {
 
   base::Thread::Options default_options;
   base::Thread::Options io_message_loop_options;
@@ -64,12 +69,12 @@ void MainLoop::CreateThreads() {
   base::ThreadRestrictions::DisallowWaiting();
 }
 
-void MainLoop::RunMainMessageLoop() {
+void MainProcess::RunMainMessageLoop() {
   base::RunLoop run_loop;
   run_loop.Run();
 }
 
-void MainLoop::ShutdownThreadAndCleanUp() {
+void MainProcess::ShutdownThreadAndCleanUp() {
   base::ThreadRestrictions::SetIOAllowed(true);
 
   ThreadHelper::PostTask(ThreadHelper::IO, FROM_HERE, base::Bind(base::IgnoreResult(
@@ -94,4 +99,10 @@ void MainLoop::ShutdownThreadAndCleanUp() {
 
     ThreadHelper::ID id = static_cast<ThreadHelper::ID>(thread_id);
   }
+}
+
+DatabaseService* MainProcess::database_service() {
+  if (!database_service_.get())
+    database_service_.reset(new DatabaseService());
+  return database_service_.get();
 }

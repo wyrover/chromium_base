@@ -98,9 +98,10 @@
     <ClCompile Include="child_process_host.cc" />
     <ClCompile Include="child_process_launcher.cc" />
     <ClCompile Include="child_process.cc" />
+    <ClCompile Include="database_service.cc" />
     <ClCompile Include="frame_window.cc" />
     <ClCompile Include="leon_generator.cc" />
-    <ClCompile Include="main_loop.cc" />
+    <ClCompile Include="main_process.cc" />
     <ClCompile Include="main_runner.cc" />
     <ClCompile Include="messages_generator.cc" />
     <ClCompile Include="message_filters.cc" />
@@ -115,10 +116,11 @@
     <ClInclude Include="child_process_host.h" />
     <ClInclude Include="child_process_launcher.h" />
     <ClInclude Include="child_process.h" />
+    <ClInclude Include="database_service.h" />
     <ClInclude Include="frame_window.h" />
     <ClInclude Include="from_host_messages.h" />
     <ClInclude Include="leon_generator.h" />
-    <ClInclude Include="main_loop.h" />
+    <ClInclude Include="main_process.h" />
     <ClInclude Include="main_runner.h" />
     <ClInclude Include="messages_generator.h" />
     <ClInclude Include="message_filters.h" />

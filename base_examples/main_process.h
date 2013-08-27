@@ -7,11 +7,12 @@
 class MessageLoop;
 class ThreadImpl;
 class SubThread;
+class DatabaseService;
 
-class MainLoop {
+class MainProcess {
 public:
-  explicit MainLoop();
-  virtual ~MainLoop();
+  explicit MainProcess();
+  virtual ~MainProcess();
 
   void Init();
 
@@ -25,6 +26,8 @@ public:
 
   int GetResultCode() const {return result_code_;}
 
+  DatabaseService* database_service();
+
 private:
   int result_code_;
 
@@ -36,7 +39,9 @@ private:
 
   scoped_ptr<SubThread> io_thread_;
 
-  DISALLOW_COPY_AND_ASSIGN(MainLoop);
+  scoped_ptr<DatabaseService> database_service_;
+
+  DISALLOW_COPY_AND_ASSIGN(MainProcess);
 };
 
 #endif
