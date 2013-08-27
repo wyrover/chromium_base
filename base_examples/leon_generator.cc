@@ -25,11 +25,16 @@ namespace LEON {
   }
 
   void DelLeon(const DelLeonParams& params) {
-    ChildLeonHost::FromID(params.child_process_id_, params.routing_id_)->DelChildLeon();
+    ChildLeonHost* clh = ChildLeonHost::FromID(params.child_process_id_,
+      params.routing_id_);
+    if (clh)
+      clh->DelChildLeon();
   }
 
   void Shutdown(const ShutdownParams& params) {
-    ChildProcessHost::FromID(params.child_process_id_)->ShutdownChildProcess();
+    ChildProcessHost* cph = ChildProcessHost::FromID(params.child_process_id_);
+    if (cph)
+      cph->ShutdownChildProcess();
   }
 
   void OnPaint(HWND hWnd) {
