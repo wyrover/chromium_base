@@ -38,15 +38,14 @@ bool ChildProcessHost::CreateChildProcess() {
   if (channel_.get())
     return true;
 
-  const std::string channel_id =
-    IPC::Channel::GenerateVerifiedChannelID(std::string());
-  channel_.reset(new IPC::ChannelProxy(channel_id, IPC::Channel::MODE_SERVER, this,
+  channel_name_ = IPC::Channel::GenerateVerifiedChannelID(std::string());
+  channel_.reset(new IPC::ChannelProxy(channel_name_, IPC::Channel::MODE_SERVER, this,
     ThreadHelper::GetMessageLoopProxyForThread(ThreadHelper::IO)));
   channel_->AddFilter(new MessageFilter1(GetID()));
   channel_->AddFilter(new MessageFilter2(GetID()));
 
   CommandLine* cmd_line = new CommandLine(GetChildPath());
-  cmd_line->AppendSwitchASCII(switches::kProcessChannelID, channel_id);
+  cmd_line->AppendSwitchASCII(switches::kProcessChannelID, channel_name_);
   child_process_launcher_ = new ChildProcessLauncher(cmd_line, this);
   return true;
 }

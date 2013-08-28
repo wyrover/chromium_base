@@ -5,6 +5,10 @@
 #include "from_host_messages.h"
 #include "to_host_messages.h"
 #include "frame_window.h"
+#include "db_service.h"
+#include "main_process.h"
+
+extern MainProcess* g_main_process;
 
 bool ChildLeonHost::Delegate::OnMessageReceived(ChildLeonHost* child_leon_host,
   const IPC::Message& message) {
@@ -78,6 +82,14 @@ bool ChildLeonHost::NewChildLeon() {
   Send(new FromHost_ChildLeon_New(routing_id_, params));
   FOR_EACH_OBSERVER(ChildLeonHost::Observer, observers_, ChildLeonHostInitialized());
   InvalidateRect(FrameWindow::GetInstance()->window_handle(), NULL, TRUE);
+  DBService* db_service = g_main_process->db_service();
+  DBService::LeonRow info;
+  info.set_pipe_name(child_process_host_->channel_name());
+  info.set_process_id(child_process_host_->GetID());
+  info.set_routing_id(routing_id_);
+  info.set_created_time();
+  ThreadHelper::PostTask(ThreadHelper::DB, FROM_HERE,
+    base::Bind(base::IgnoreResult(&DBService::AddRow), db_service, info));
   return true;
 }
 

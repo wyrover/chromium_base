@@ -1,11 +1,14 @@
 #include "main_process.h"
 #include "../base/message_loop.h"
 #include "../base/bind.h"
+#include "../base/bind_helpers.h"
+#include "../base/file_path.h"
+#include "../base/path_service.h"
 #include "../base/run_loop.h"
 #include "../base/threading/thread_restrictions.h"
 #include "result_codes.h"
 #include "thread_impl.h"
-#include "database_service.h"
+#include "db_service.h"
 
 MainProcess* g_main_process = NULL;
 
@@ -54,6 +57,10 @@ void MainProcess::CreateThreads() {
       thread_to_start = &io_thread_;
       options = &io_message_loop_options;
       break;
+    case ThreadHelper::DB:
+      thread_to_start = &db_thread_;
+      options = &ui_message_loop_options;
+      break;
     case ThreadHelper::UI:
     default:
       NOTREACHED();
@@ -91,6 +98,9 @@ void MainProcess::ShutdownThreadAndCleanUp() {
     case ThreadHelper::IO:
       thread_to_stop = &io_thread_;
       break;
+    case ThreadHelper::DB:
+      thread_to_stop = &db_thread_;
+      break;
     case ThreadHelper::UI:
     default:
       NOTREACHED();
@@ -101,8 +111,14 @@ void MainProcess::ShutdownThreadAndCleanUp() {
   }
 }
 
-DatabaseService* MainProcess::database_service() {
-  if (!database_service_.get())
-    database_service_.reset(new DatabaseService());
-  return database_service_.get();
+DBService* MainProcess::db_service() {
+  if (!db_service_.get()) {
+    db_service_ = new DBService();
+    FilePath db_path;
+    PathService::Get(base::DIR_EXE, &db_path);
+    db_path = db_path.Append(L"user data");
+    db_thread_->message_loop()->PostTask(FROM_HERE,
+      base::Bind(&DBService::Init, db_service_.get(), db_path));
+  }
+  return db_service_.get();
 }

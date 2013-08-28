@@ -3,11 +3,12 @@
 
 #include "../base/basictypes.h"
 #include "../base/memory/scoped_ptr.h"
+#include "../base/memory/ref_counted.h"
 
 class MessageLoop;
 class ThreadImpl;
 class SubThread;
-class DatabaseService;
+class DBService;
 
 class MainProcess {
 public:
@@ -26,7 +27,7 @@ public:
 
   int GetResultCode() const {return result_code_;}
 
-  DatabaseService* database_service();
+  DBService* db_service();
 
 private:
   int result_code_;
@@ -39,7 +40,9 @@ private:
 
   scoped_ptr<SubThread> io_thread_;
 
-  scoped_ptr<DatabaseService> database_service_;
+  scoped_ptr<SubThread> db_thread_;
+
+  scoped_refptr<DBService> db_service_;
 
   DISALLOW_COPY_AND_ASSIGN(MainProcess);
 };

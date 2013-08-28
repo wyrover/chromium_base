@@ -51,9 +51,13 @@ public:
 
   int GetID() const { return id_; }
 
+  const std::string& channel_name() const { return channel_name_; }
+
   IDMap<ChildLeonHost>& ChildLeonHosts() { return child_leon_hosts_; }
 
   bool HasConnection() { return channel_.get() != NULL; }
+
+  IPC::ChannelProxy* GetChannel() { return channel_.get(); }
 
   base::ProcessHandle GetHandle();
 
@@ -68,6 +72,8 @@ private:
   IDMap<ChildLeonHost> child_leon_hosts_;
 
   int id_;
+
+  std::string channel_name_;
 
   bool delete_soon_;
 

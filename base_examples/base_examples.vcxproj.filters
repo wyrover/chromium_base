@@ -16,7 +16,7 @@
     <ClCompile Include="child_process.cc" />
     <ClCompile Include="sandbox_policy.cc" />
     <ClCompile Include="main_process.cc" />
-    <ClCompile Include="database_service.cc" />
+    <ClCompile Include="db_service.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base_examples.h" />
@@ -39,7 +39,7 @@
     <ClInclude Include="sandbox_policy.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="main_process.h" />
-    <ClInclude Include="database_service.h" />
+    <ClInclude Include="db_service.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="base_examples.rc" />

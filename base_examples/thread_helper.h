@@ -18,6 +18,8 @@ public:
 
     IO,
 
+    DB,
+
     ID_COUNT
   };
 

@@ -8,7 +8,8 @@ namespace {
   static const char* g_thread_names[ThreadHelper::ID_COUNT] = {
     "",
     "FileThread",
-    "IoThread"
+    "IoThread",
+    "DBThread"
   };
 
   struct ThreadGlobals {
