@@ -376,6 +376,24 @@
     <ClCompile Include="sandbox\win_utils.cc">
       <Filter>sandbox</Filter>
     </ClCompile>
+    <ClCompile Include="sql\connection.cc">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="sql\error_delegate_util.cc">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="sql\meta_table.cc">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="sql\sqlite3.c">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="sql\statement.cc">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="sql\transaction.cc">
+      <Filter>sql</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="precompile.h" />
@@ -916,6 +934,30 @@
     <ClInclude Include="sandbox\win_utils.h">
       <Filter>sandbox</Filter>
     </ClInclude>
+    <ClInclude Include="sql\connection.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="sql\diagnostic_error_delegate.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="sql\error_delegate_util.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="sql\init_status.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="sql\meta_table.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="sql\sqlite3.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="sql\statement.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="sql\transaction.h">
+      <Filter>sql</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="json">
@@ -962,6 +1004,9 @@
     </Filter>
     <Filter Include="sandbox">
       <UniqueIdentifier>{ab87937a-5cf2-4644-8423-13771c9d76f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sql">
+      <UniqueIdentifier>{d21ecb7d-a141-4868-b7e4-e4468a80f3df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

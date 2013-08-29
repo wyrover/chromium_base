@@ -1,28 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="small.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="base_examples.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="base_examples.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="base_examples.cc" />
     <ClCompile Include="main_runner.cc" />
-    <ClCompile Include="main_loop.cc" />
     <ClCompile Include="thread_impl.cc" />
     <ClCompile Include="frame_window.cc" />
     <ClCompile Include="child_leon.cc" />
@@ -35,12 +15,13 @@
     <ClCompile Include="message_filters.cc" />
     <ClCompile Include="messages_generator.cc" />
     <ClCompile Include="sandbox_policy.cc" />
+    <ClCompile Include="db_service.cc" />
+    <ClCompile Include="main_process.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base_examples.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="main_runner.h" />
-    <ClInclude Include="main_loop.h" />
     <ClInclude Include="thread_impl.h" />
     <ClInclude Include="thread_helper.h" />
     <ClInclude Include="result_codes.h" />
@@ -57,5 +38,16 @@
     <ClInclude Include="messages_generator.h" />
     <ClInclude Include="sandbox_policy.h" />
     <ClInclude Include="to_host_messages.h" />
+    <ClInclude Include="db_service.h" />
+    <ClInclude Include="main_process.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="base_examples.ico" />
+    <None Include="small.ico" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="base_examples.rc" />
   </ItemGroup>
 </Project>
